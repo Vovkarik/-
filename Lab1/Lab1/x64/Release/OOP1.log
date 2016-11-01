@@ -1,0 +1,10 @@
+﻿  replace.cpp
+replace.cpp(62): warning C4390: ";": обнаружен пустой контролируемый оператор; это правильно?
+  Создание кода
+c:\users\lenovo\documents\visual studio 2015\projects\oop1\oop1\replace.cpp(51): warning C4715: Errors: значение возвращается не при всех путях выполнения
+  2 of 190 functions ( 1.1%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    13 functions had inline decision re-evaluated but remain unchanged
+  Создание кода завершено
+  OOP1.vcxproj -> C:\Users\Lenovo\Documents\Visual Studio 2015\Projects\OOP1\x64\Release\replace.exe
+  OOP1.vcxproj -> C:\Users\Lenovo\Documents\Visual Studio 2015\Projects\OOP1\x64\Release\replace.pdb (Full PDB)

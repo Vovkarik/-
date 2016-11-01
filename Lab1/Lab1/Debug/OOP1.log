@@ -1,0 +1,21 @@
+﻿C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets(392,5): warning MSB8028: The intermediate directory (Debug\) contains files shared from another project (OOP1.vcxproj).  This can lead to incorrect clean and rebuild behavior.
+  stdafx.cpp
+  replace.cpp
+c:\users\lenovo\documents\visual studio 2015\projects\oop1\oop1\replace.cpp(48): warning C4715: errors: значение возвращается не при всех путях выполнения
+  OOP1.vcxproj -> C:\Users\Lenovo\Documents\Visual Studio 2015\Projects\OOP1\Debug\replace.exe
+  OOP1.vcxproj -> C:\Users\Lenovo\Documents\Visual Studio 2015\Projects\OOP1\Debug\replace.pdb (Full PDB)
+  "empty.txt" не является внутренней или внешней
+  командой, исполняемой программой или пакетным файлом.
+  "in.txt" не является внутренней или внешней
+  командой, исполняемой программой или пакетным файлом.
+  FC: не удается открыть C:\USERS\LENOVO\APPDATA\LOCAL\TEMP\OUT.TXT; файл либо папка не существует.
+  
+  "mama.txt" не является внутренней или внешней
+  командой, исполняемой программой или пакетным файлом.
+  FC: не удается открыть C:\USERS\LENOVO\APPDATA\LOCAL\TEMP\MAMA-OUT.TXT; файл либо папка не существует.
+  
+  "numbers.txt" не является внутренней или внешней
+  командой, исполняемой программой или пакетным файлом.
+  FC: не удается открыть C:\USERS\LENOVO\APPDATA\LOCAL\TEMP\NUMBERS-OUT.TXT; файл либо папка не существует.
+  
+  Program testing succeeded
