@@ -1,6 +1,8 @@
 #pragma once
 static const int MIN_SPEED = 0;
 static const int MAX_SPEED = 150;
+static const int MIN_GEAR = -1;
+static const int MAX_GEAR = 5;
 
 enum class Direction
 {

@@ -12,7 +12,7 @@ static const SpeedRange speedRange = {
 	{ Gear::FIFTH_GEAR, Speed(50, MAX_SPEED) }
 };
 
-bool CheckIfSpeedInRange(Gear const &gear, int speed) const
+bool CCar::CheckIfSpeedInRange(Gear const &gear, int speed) const
 {
 	auto it = speedRange.find(gear);
 	auto speedRange = it->second;
@@ -42,13 +42,20 @@ bool CCar::TurnEngineOff()
 	m_isEngineOn = false;
 }
 
-bool CCar::SetGear(const Gear &gear)
+bool CCar::SetGear(int gear)
 {
-	if ((!m_isEngineOn) && (gear == NEUTRAL_GEAR)
+	bool isAvaluableToChangeGear = (gear <= MAX_GEAR) && (gear >= MIN_GEAR) && m_isEngineOn;
+
+	if (isAvaluableToChangeGear)
 	{
 		m_gear = 0;
 		return true;
 	}
+}
+
+int CCar::GetGear()
+{
+	return m_gear;
 }
 
 bool CCar::SetSpeed(int speed)
@@ -59,4 +66,9 @@ bool CCar::SetSpeed(int speed)
 		return true;
 	}
 	else return false
+}
+
+int CCar::GetSpeed()
+{
+	return m_speed;
 }
