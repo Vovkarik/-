@@ -6,17 +6,18 @@ static const int MAX_GEAR = 5;
 
 enum class Direction
 {
-	BACK,
-	FORW,
-	STAND;
+	BACK = -1,
+	STAND,
+	FORWARD
 };
+
 enum class Gear
 {
+	REVERSE_GEAR = -1,
 	NEUTRAL_GEAR,
 	FIRST_GEAR,
 	SECOND_GEAR,
-	THIRD_GEAR,
+	THIRD_GEAR ,
 	FOURTH_GEAR,
-	FIFTH_GEAR,
-	REVERSE_GEAR;
+	FIFTH_GEAR
 };
