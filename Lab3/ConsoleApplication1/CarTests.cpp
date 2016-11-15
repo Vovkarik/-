@@ -105,6 +105,7 @@ BOOST_AUTO_TEST_CASE(can_set_speed_ranged_from_0_to_20)
 	car.SetSpeed(20);
 	BOOST_CHECK_EQUAL(car.GetCurrentSpeed(), 20);
 }
+
 BOOST_AUTO_TEST_CASE(can_set_the_neutral_gear)
 {
 	BOOST_CHECK(car.SetGear(0));
@@ -131,7 +132,6 @@ BOOST_AUTO_TEST_CASE(can_not_switch_to_the_first_speed_is_when_gear_equal_to_rev
 
 BOOST_AUTO_TEST_CASE(can_switch_to_the_first_speed_is_when_gear_equal_to_neutral)
 {
-
 	BOOST_CHECK(car.SetGear(0));
 	BOOST_CHECK(car.SetSpeed(0));
 	BOOST_CHECK(car.SetGear(1));
@@ -148,7 +148,7 @@ struct when_neutral_gear_set_ : when_turned_on_
 	}
 };
 BOOST_FIXTURE_TEST_SUITE(when_neutral_gear_set, when_neutral_gear_set_)
-BOOST_AUTO_TEST_CASE(car_can_not_accelerated_speed) //íåâîçìîæíî óñêîðèòñüñÿ íà íåéòðàëüíîì ïåðåäà÷å
+BOOST_AUTO_TEST_CASE(car_can_not_accelerated_speed)
 {
 	ExpectFailure(car, [](auto & car)
 	{
@@ -168,7 +168,7 @@ BOOST_AUTO_TEST_CASE(car_cant_increase_speed)
 	BOOST_CHECK_EQUAL(car.GetCurrentSpeed(), 5);
 }
 
-BOOST_AUTO_TEST_CASE(while_moving_forward_can_not_be_turned_reverse_gear) // ïðè äâèæåíèè âïåðåä íåëüçÿ âêëþ÷èòü çàäíþþ ïåðåäà÷ó
+BOOST_AUTO_TEST_CASE(while_moving_forward_can_not_be_turned_reverse_gear) 
 {
 	ExpectFailure(car, [](auto & car)
 	{
@@ -194,7 +194,7 @@ BOOST_AUTO_TEST_CASE(car_cant_drive_at_a_speed_which_ist_suitable_for_the_curren
 	});
 }
 
-BOOST_AUTO_TEST_CASE(car_cant_change_the_gear_ist_available_during_motion_at_the_current_speed)//ñìåíèòü ïåðåäà÷ó, íåäîñòóïíóþ ïðè äâèæåíèè íà òåêóùåé ñêîðîñòè.
+BOOST_AUTO_TEST_CASE(car_cant_change_the_gear_ist_available_during_motion_at_the_current_speed)
 {
 	ExpectFailure(car, [](auto & car)
 	{
@@ -202,7 +202,7 @@ BOOST_AUTO_TEST_CASE(car_cant_change_the_gear_ist_available_during_motion_at_the
 	});
 }
 
-BOOST_AUTO_TEST_CASE(while_moving_forward_can_not_be_turned_reverse_gear) // ïðè äâèæåíèè âïåðåä íåëüçÿ âêëþ÷èòü çàäíþþ ïåðåäà÷ó
+BOOST_AUTO_TEST_CASE(while_moving_forward_can_not_be_turned_reverse_gear) 
 {
 	ExpectFailure(car, [](auto & car)
 	{

@@ -3,6 +3,7 @@
 
 typedef std::pair<int, int> Speed;
 typedef std::map<Gear, Speed> SpeedRange;
+
 static const SpeedRange speedRange =
 {
 	{ Gear::REVERSE_GEAR, Speed(MIN_SPEED, 20) },
@@ -26,9 +27,9 @@ public:
 	int GetCurrentSpeed() const;
 	bool CheckIfSpeedInRange(Gear const &gear, int speed) const;
 	bool CheckGear(int gear) const;
+	Direction GetDirection() const;
 private:
 	bool m_isEngineOn = false;
-	Direction m_direction = Direction::STAND;
 	Gear m_gear = Gear::NEUTRAL_GEAR;
 	int m_speed = 0;
 };

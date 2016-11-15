@@ -21,12 +21,5 @@ private:
 	std::istream & m_input;
 	std::ostream & m_output;
 
-	const ActionMap m_actionMap; /*=
-	{
-		{ "EngineOn", std::bind(&Driver::TurnEngineOn, this, std::placeholders::_1) },
-		{ "EngineOff", std::bind(&Driver::TurnEngineOff, this, std::placeholders::_1) },
-		{ "SetGear", std::bind(&Driver::SetGear, this, std::placeholders::_1) },
-		{ "SetSpeed", std::bind(&Driver::SetSpeed, this, std::placeholders::_1) },
-		{ "Info", std::bind(&Driver::Info, this, std::placeholders::_1) },
-	};*/
+	const ActionMap m_actionMap;
 };

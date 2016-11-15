@@ -71,9 +71,9 @@ bool CCar::SetSpeed(int speed)
 	bool isSetSpeed = false;
 	if (CheckIfSpeedInRange(m_gear, speed))
 	{
-		if ((m_gear == Gear::NEUTRAL_GEAR) && (speed <= GetCurrentSpeed()) || !(m_gear == Gear::NEUTRAL_GEAR))
+		if (((m_gear == Gear::NEUTRAL_GEAR) && (speed <= GetCurrentSpeed())) || !(m_gear == Gear::NEUTRAL_GEAR))
 		{
-			m_speed = (Gear::REVERSE_GEAR == m_gear) || (m_speed < 0) ? -speed : speed;
+			m_speed = speed;
 			isSetSpeed = true;
 		}
 	}
@@ -83,4 +83,22 @@ bool CCar::SetSpeed(int speed)
 int CCar::GetCurrentSpeed() const
 {
 	return m_speed;
+}
+
+Direction CCar::GetDirection() const
+{
+	Direction direction;
+	if (m_speed > 0)
+	{
+		direction = Direction::FORWARD;
+	}
+	else if (m_speed < 0)
+	{
+		direction = Direction::BACK;
+	}
+	else
+	{
+		direction = Direction::STAND;
+	}
+	return direction;
 }
