@@ -17,7 +17,7 @@ void ExpectFailure(CCar car, const std::function<bool(CCar & car)> & operation)
 }
 
 BOOST_FIXTURE_TEST_SUITE(Car, CCarFixture)
-BOOST_AUTO_TEST_CASE(is_turned_off_by_default)
+BOOST_AUTO_TEST_CASE(turned_off_by_default)
 {
 	BOOST_CHECK(!car.IsEngineOn());
 }
@@ -40,7 +40,7 @@ BOOST_AUTO_TEST_CASE(on_create_speed_is_0)
 {
 	BOOST_CHECK(car.GetCurrentSpeed() == 0);
 }
-BOOST_AUTO_TEST_CASE(gear_0_by_default)
+BOOST_AUTO_TEST_CASE(neutral_gear_by_default)
 {
 	BOOST_CHECK_EQUAL(car.GetCurrentGear(), 0);
 }
@@ -64,7 +64,8 @@ BOOST_AUTO_TEST_CASE(on_speed_is_0)
 }
 BOOST_AUTO_TEST_CASE(can_set_a_reverse_gear)
 {
-	BOOST_CHECK(car.SetGear(-1) && (car.GetCurrentGear() == -1));
+	BOOST_CHECK(car.SetGear(-1));
+	BOOST_CHECK_EQUAL(car.GetCurrentGear(), -1);
 }
 BOOST_AUTO_TEST_CASE(when_the_speed_is_not_zero_the_engine_doest_off)
 {
@@ -78,6 +79,8 @@ BOOST_AUTO_TEST_CASE(when_the_speed_is_not_zero_the_engine_doest_off)
 
 BOOST_AUTO_TEST_CASE(engine_can_only_be_off_in_the_neutral_position_at_zero_speed)
 {
+	BOOST_CHECK(car.SetGear(0));
+	BOOST_CHECK(car.SetSpeed(0));
 	BOOST_CHECK(car.TurnEngineOff());
 }
 
