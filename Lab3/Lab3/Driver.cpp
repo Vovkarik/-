@@ -5,6 +5,25 @@
 using namespace std;
 using namespace std::placeholders;
 
+string GetDirectionString(Direction const& direction) 
+{
+	string result;
+	if (direction == Direction::FORWARD)
+	{
+		result = "Forward";
+	}
+	else if (direction == Direction::BACK)
+	{
+		result = "Backward";
+	}
+	else
+	{
+		result = "Standing";
+	}
+	return result;
+}
+
+
 Driver::Driver(CCar & car, std::istream & input, std::ostream & output)
 	: m_car(car)
 	, m_input(input)
@@ -41,7 +60,7 @@ bool Driver::HandleCommand()
 	return true;
 }
 
-bool Driver::TurnEngineOn(std::istream & /*args*/)
+bool Driver::TurnEngineOn(std::istream & args)
 {
 	bool isTurnOnEngine = m_car.TurnEngineOn();
 	std::string output;
@@ -57,7 +76,7 @@ bool Driver::TurnEngineOn(std::istream & /*args*/)
 	return isTurnOnEngine;
 }
 
-bool Driver::TurnEngineOff(std::istream & /*args*/)
+bool Driver::TurnEngineOff(std::istream & args)
 {
 	bool isTurnOffEngine = m_car.TurnEngineOn();
 	std::string output;
@@ -109,38 +128,18 @@ bool Driver::SetSpeed(std::istream & args)
 	return isSetSpeed;
 }
 
-bool Driver::Info(std::istream & /*args*/)
+bool Driver::Info(std::istream & args)
 {
-	std::string output;
 	if (m_car.IsEngineOn())
 	{
-		"Engine is turned on\n";
-		//"Direction: " + GetDirectionString(m_car.GetDirection()) + "\n";
-		"Gear: " + std::to_string(static_cast <int>(m_car.GetCurrentGear())) + "\n";
-		"Speed: " + std::to_string(m_car.GetCurrentSpeed()) + "\n";
+		m_output << "Engine is turned on\n";
+		m_output << "Direction: " + GetDirectionString(m_car.GetDirection()) + "\n";
+		m_output << "Gear: " + std::to_string(static_cast <int>(m_car.GetCurrentGear())) + "\n";
+		m_output << "Speed: " + std::to_string(m_car.GetCurrentSpeed()) + "\n";
 	}
 	else
 	{
-		output =  "Engine is turned off\n";
+		m_output << "Engine is turned off\n";
 	}
-	m_output << output;
 	return true;
 }
-
-/*std::string Driver::GetDirectionString(Direction const& direction)
-{
-	std::string result;
-	if (direction == Direction::FORWARD)
-	{
-		result = "Forward";
-	}
-	else if (direction == Direction::BACKWARD)
-	{
-		result = "Backward";
-	}
-	else
-	{
-		result = "Standing";
-	}
-	return result;
-}*/

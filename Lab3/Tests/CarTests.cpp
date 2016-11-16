@@ -189,7 +189,7 @@ struct when_the_car_is_moving_ : when_turned_on_
 	}
 };
 BOOST_FIXTURE_TEST_SUITE(when_the_car_is_moving, when_the_car_is_moving_)
-BOOST_AUTO_TEST_CASE(car_cant_drive_at_a_speed_which_ist_suitable_for_the_current_gear) //àâòîìîáèëü íå ìîæåò åõàòü ñî ñêîðîñòüþ, íå ïîäõîäÿùåé äëÿ òåêóùåé ïåðåäà÷è
+BOOST_AUTO_TEST_CASE(car_cant_drive_at_a_speed_which_ist_suitable_for_the_current_gear)
 {
 	ExpectFailure(car, [](auto & car)
 	{
