@@ -9,7 +9,29 @@ CRectangle::CRectangle(Point const& leftTop, double width, double height, std::s
 	, m_outlineColor(outlineColor)
 	, m_fillColor(fillColor)
 {
+	m_rightBottom = Point(leftTop.x + width, leftTop.y + height);
 }
+
+double CRectangle::GetArea() const
+{
+	return m_width * m_height;
+}
+
+double CRectangle::GetPerimeter() const
+{
+	return (m_width + m_height) * 2;
+}
+
+std::string CRectangle::GetOutlineColor() const
+{
+	return m_outlineColor;
+}
+
+std::string CRectangle::GetFillColor() const
+{
+	return m_fillColor;
+}
+
 
 Point CRectangle::GetLeftTop() const
 {
@@ -29,4 +51,16 @@ double CRectangle::GetWidth() const
 double CRectangle::GetHeight() const
 {
 	return m_height;
+}
+
+std::string CRectangle::ToString() const
+{
+	return (std::string("Rectangle") + "\n"
+		+ "Area: " + std::to_string(GetArea()) + "\n"
+		+ "Perimeter: " + std::to_string(GetPerimeter()) + "\n"
+		+ "Outline color: " + GetOutlineColor() + "\n"
+		+ "LeftTop: " + GetLeftTop().ToString() + "\n"
+		+ "RightBottom: " + GetRightBottom().ToString() + "\n"
+		+ "Width: " + std::to_string(GetWidth()) + "\n"
+		+ "Height: " + std::to_string(GetHeight()) + "\n");
 }

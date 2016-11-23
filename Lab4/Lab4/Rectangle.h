@@ -5,14 +5,15 @@ class CRectangle : public ISolidShape
 public:
 	CRectangle(Point const& leftTop, double width, double height, std::string const& outlineColor, std::string const& fillColor);
 	~CRectangle() = default;
+	double GetArea() const;
+	double GetPerimeter() const;
+	std::string GetOutlineColor() const;
 	Point GetLeftTop() const;
 	Point GetRightBottom() const;
 	double GetWidth() const;
 	double GetHeight() const;
-	double GetArea() const = 0;
-	double GetPerimeter() const = 0;
+	std::string GetFillColor() const;
 	std::string ToString() const;
-	std::string GetOutlineColor() const = 0;
 private:
 	Point m_leftTop, m_rightBottom;
 	double m_width, m_height;
