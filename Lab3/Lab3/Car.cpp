@@ -25,14 +25,13 @@ bool CCar::IsEngineOn()const
 
 bool CCar::TurnEngineOn()
 {
-	if ((m_speed == 0) && (m_gear == Gear::NEUTRAL_GEAR))
+	bool isTurnOnEngine = false;
+	if (!(m_isEngineOn) && (m_speed == 0) && (m_gear == Gear::NEUTRAL_GEAR))
 	{
 		m_isEngineOn = true;
-		m_gear = Gear::NEUTRAL_GEAR;
-		m_speed = 0;
-		return true;
+		isTurnOnEngine = true;
 	}
-	else return false;
+	return isTurnOnEngine;
 }
 
 bool CCar::TurnEngineOff()

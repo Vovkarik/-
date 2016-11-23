@@ -60,7 +60,7 @@ bool Driver::HandleCommand()
 	return true;
 }
 
-bool Driver::TurnEngineOn(std::istream & args)
+bool Driver::TurnEngineOn(std::istream &)
 {
 	bool isTurnOnEngine = m_car.TurnEngineOn();
 	std::string output;
@@ -76,9 +76,9 @@ bool Driver::TurnEngineOn(std::istream & args)
 	return isTurnOnEngine;
 }
 
-bool Driver::TurnEngineOff(std::istream & args)
+bool Driver::TurnEngineOff(std::istream &)
 {
-	bool isTurnOffEngine = m_car.TurnEngineOn();
+	bool isTurnOffEngine = m_car.TurnEngineOff();
 	std::string output;
 	if (isTurnOffEngine)
 	{
@@ -86,7 +86,7 @@ bool Driver::TurnEngineOff(std::istream & args)
 	}
 	else
 	{
-		output = "Engine is already off!\n";
+		output = "Engine is already off or it can't be off!\n";
 	}
 	m_output << output;
 	return isTurnOffEngine;
@@ -128,7 +128,7 @@ bool Driver::SetSpeed(std::istream & args)
 	return isSetSpeed;
 }
 
-bool Driver::Info(std::istream & args)
+bool Driver::Info(std::istream &)
 {
 	if (m_car.IsEngineOn())
 	{
