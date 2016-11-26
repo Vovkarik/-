@@ -7,8 +7,6 @@
 
 #include <stdio.h>
 #include <tchar.h>
-#include <vector>
-#include <string>
 #define _SCL_SECURE_NO_WARNINGS
 #define BOOST_TEST_INCLUDED
 #pragma warning (disable:4702) // To disable 4702 warning in boost
