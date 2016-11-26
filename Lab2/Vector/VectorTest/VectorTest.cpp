@@ -5,7 +5,8 @@ BOOST_AUTO_TEST_SUITE(GetNumbers_function)
 	BOOST_AUTO_TEST_CASE(check_empty_numbers)
 	{
 		std::string inputString = "";
-		BOOST_CHECK(GetNumbers(inputString).size() == 0);
+		std::vector<double> numbers = GetNumbers(inputString);
+		BOOST_CHECK(numbers.size == 0);
 	}
 
 	BOOST_AUTO_TEST_CASE(input_string_has_numbers_1_2_3)
