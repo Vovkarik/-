@@ -6,7 +6,6 @@
 #pragma once
 
 #include "targetver.h"
-#define _SCL_SECURE_NO_WARNINGS
 #include <iostream>
 #include <vector>
 #include <string>
