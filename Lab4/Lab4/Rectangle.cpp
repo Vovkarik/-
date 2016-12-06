@@ -59,6 +59,7 @@ std::string CRectangle::ToString() const
 		+ "Area: " + std::to_string(GetArea()) + "\n"
 		+ "Perimeter: " + std::to_string(GetPerimeter()) + "\n"
 		+ "Outline color: " + GetOutlineColor() + "\n"
+		+ "Fill color: " + GetFillColor() + "\n"
 		+ "LeftTop: " + GetLeftTop().ToString() + "\n"
 		+ "RightBottom: " + GetRightBottom().ToString() + "\n"
 		+ "Width: " + std::to_string(GetWidth()) + "\n"

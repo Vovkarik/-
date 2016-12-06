@@ -22,8 +22,9 @@ void ProcessVector(std::vector<double> & numbers)
 {
 	if (!numbers.empty())
 	{
-		std::for_each(numbers.begin(), numbers.end(), [](double &n) { n+=3; });
 		std::sort(numbers.begin(), numbers.end());
+		double divider = numbers.back();
+		transform(numbers.begin(), numbers.end(), numbers.begin(), ([&](double a) {return a / divider; }));
 		OutputNumbers(numbers);
 	}
 }

@@ -26,9 +26,9 @@ BOOST_AUTO_TEST_SUITE_END()
 BOOST_AUTO_TEST_SUITE(ProcessVector_function)
 	BOOST_AUTO_TEST_CASE(check_the_modified_vector_elements_value)
 	{
-		std::string inputString = "1 2 3";
+		std::string inputString = "4 4 4";
 		std::vector<double> numbers = GetNumbers(inputString);
 		ProcessVector(numbers);
-		BOOST_CHECK(numbers[2] == 6);
+		BOOST_CHECK(numbers[2] == 1);
 	}
 BOOST_AUTO_TEST_SUITE_END()
