@@ -3,7 +3,7 @@
 
 int main()
 {
-	std::set<int> primeNumbersSet = GeneratePrimeNumbersSet(100);
-	/*PrintPrimeNumbersInOutput(primeNumbersSet);
-	return 0;*/
+	std::set<int> primeNumbersSet = GeneratePrimeNumbersSet(100000);
+	PrintPrimeNumbersInOutput(primeNumbersSet);
+	return 0;
 }
