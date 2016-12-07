@@ -26,7 +26,7 @@ BOOST_AUTO_TEST_SUITE(HtmlDecode_function)
 	BOOST_AUTO_TEST_CASE(replace_syntax)
 	{
 		string strWithHtmlSyntax = "This&apos;s the &lt;string&gt; with &quot;HTML&quot; syntax";
-		string requiredStr = "This's the <string> with \"HTML\"; syntax";
+		string requiredStr = "This's the <string> with \"HTML\" syntax";
 		BOOST_CHECK_EQUAL(HtmlDecode(strWithHtmlSyntax), requiredStr);
 	}
 BOOST_AUTO_TEST_SUITE_END()

@@ -3,7 +3,7 @@
 
 #include "stdafx.h"
 const std::map <std::string, std::string> decodeKeys = {{ "&quot;", "\"" },
-														{ "&apos;", "’" },
+														{ "&apos;", "'" },
 														{ "&lt;", "<" },
 														{ "&gt;", ">" },
 														{ "&amp;", "&" }};

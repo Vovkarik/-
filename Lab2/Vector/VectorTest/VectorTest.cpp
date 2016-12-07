@@ -13,22 +13,22 @@ BOOST_AUTO_TEST_SUITE(GetNumbers_function)
 	{
 		std::string inputString = "1 2 3 4 5";
 		std::vector<double> numbers = GetNumbers(inputString);
-		BOOST_CHECK(numbers[3] == 4);
+		BOOST_CHECK_EQUAL(numbers[3], 4);
 	}
 
 	BOOST_AUTO_TEST_CASE(vector_size_coincides_with_the_expected)
 	{
 		std::string inputString = "1 2 3 4 5 3 4 4 3";
-		BOOST_CHECK(GetNumbers(inputString).size() == 9);
+		BOOST_CHECK_EQUAL(GetNumbers(inputString).size(), 9);
 	}
 BOOST_AUTO_TEST_SUITE_END()
 
 BOOST_AUTO_TEST_SUITE(ProcessVector_function)
 	BOOST_AUTO_TEST_CASE(check_the_modified_vector_elements_value)
 	{
-		std::string inputString = "4 4 4";
+		std::string inputString = "2 3 4";
 		std::vector<double> numbers = GetNumbers(inputString);
 		ProcessVector(numbers);
-		BOOST_CHECK(numbers[2] == 1);
+		BOOST_CHECK_EQUAL(numbers[2], 8);
 	}
 BOOST_AUTO_TEST_SUITE_END()
