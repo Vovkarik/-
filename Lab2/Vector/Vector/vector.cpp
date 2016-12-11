@@ -11,7 +11,6 @@ int main()
 	std::getline(std::cin, inputString);
 	std::vector<double> numbers = GetNumbers(inputString);
 	ProcessVector(numbers);
-	getchar();
 	return 0;
 }
 

@@ -5,7 +5,7 @@
 #include "../PrimeNumbers/PrimeNumbers.h"
 
 BOOST_AUTO_TEST_SUITE(GeneratePrimeNumbersSet_function)
-	BOOST_AUTO_TEST_CASE(it_creates_an_empty_set_of_upper_bound_0)
+	BOOST_AUTO_TEST_CASE(creates_an_empty_set_of_upper_bound_0)
 	{
 		std::set<int> emptySet = {};
 		BOOST_CHECK(GeneratePrimeNumbersSet(0) == emptySet);

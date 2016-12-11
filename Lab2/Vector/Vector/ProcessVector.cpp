@@ -13,18 +13,22 @@ std::vector<double> GetNumbers(std::string const& inputString)
 	return numbers;
 }
 
-void OutputNumbers(std::vector<double> const& numbers)
-{
-	std::copy(numbers.begin(), numbers.end(), std::ostream_iterator<double>(std::cout, " "));
-}
-
 void ProcessVector(std::vector<double> & numbers)
 {
 	if (!numbers.empty())
 	{
-		std::sort(numbers.begin(), numbers.end());
-		double multiplier = numbers.front();
+		double multiplier = *std::min_element(numbers.begin(), numbers.end());
 		transform(numbers.begin(), numbers.end(), numbers.begin(), ([&](double a) {return a * multiplier; }));
-		OutputNumbers(numbers);
 	}
+}
+
+void SortingVector(std::vector<double> & numbers)
+{
+	std::sort(numbers.begin(), numbers.end());
+}
+
+void OutputNumbers(std::vector<double> & numbers)
+{
+	SortingVector(numbers);
+	std::copy(numbers.begin(), numbers.end(), std::ostream_iterator<double>(std::cout, " "));
 }
