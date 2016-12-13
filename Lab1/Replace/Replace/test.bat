@@ -1,7 +1,4 @@
-﻿set PROGRAM="%~1"
-
-%PROGRAM%
-if %ERRORLEVEL% EQU 0 goto err
+set PROGRAM="%~1"
 
 rem unexisting file test
 %PROGRAM% null.txt %TEMP%\null.txt "some string" "some another string"
@@ -12,13 +9,13 @@ rem empty file test
 if %ERRORLEVEL% EQU 0 goto err
 
 rem multiline file test
-%PROGRAM% in.txt %TEMP%\in.txt Водитель Велосипедист
+%PROGRAM% in.txt %TEMP%\in.txt And But
 if %ERRORLEVEL% EQU 1 goto err
 fc.exe %TEMP%\in.txt in.txt
 if %ERRORLEVEL% EQU 0 goto err
 
 rem mama test
-%PROGRAM% mama.txt %TEMP%/mama.txt ма мама
+%PROGRAM% mama.txt %TEMP%/mama.txt ma mama
 if %ERRORLEVEL% EQU 1 goto err
 fc.exe %TEMP%\mama.txt mama.txt
 if %ERRORLEVEL% EQU 0 goto err
