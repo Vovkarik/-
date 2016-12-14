@@ -21,10 +21,8 @@ BOOST_AUTO_TEST_SUITE(GeneratePrimeNumbersSet_function)
 		BOOST_CHECK(GeneratePrimeNumbersSet(100) == exampleSet);
 	}
 
-	BOOST_AUTO_TEST_SUITE(checking_the_count_of_elements_in_the_set)
-		BOOST_AUTO_TEST_CASE(upper_bound_is_equal_to_the_maximum_value)
-		{
-			BOOST_CHECK_EQUAL(GeneratePrimeNumbersSet(100000).size(), 9592);
-		}
-	BOOST_AUTO_TEST_SUITE_END()
+	BOOST_AUTO_TEST_CASE(creates_a_set_with_the_right_amount_of_elements)
+	{
+		BOOST_CHECK_EQUAL(GeneratePrimeNumbersSet(100000).size(), 9592);
+	}
 BOOST_AUTO_TEST_SUITE_END()

@@ -20,20 +20,20 @@ BOOST_AUTO_TEST_SUITE(GetNumbers_function)
 BOOST_AUTO_TEST_SUITE_END()
 
 BOOST_AUTO_TEST_SUITE(SortingVector_function)
-BOOST_AUTO_TEST_CASE(properly_handle_empty_vector)
-{
-	std::vector<double> numbers = {};
-	std::vector<double> expectedResult = {};
-	ProcessVector(numbers);
-	BOOST_CHECK(numbers == expectedResult);
-}
-BOOST_AUTO_TEST_CASE(properly_modify_vector)
-{
-	std::vector<double> numbers = { 5, 1, 7 };
-	std::vector<double> expectedResult = { 1, 5, 7 };
-	SortingVector(numbers);
-	BOOST_CHECK(numbers == expectedResult);
-}
+	BOOST_AUTO_TEST_CASE(properly_handle_empty_vector)
+	{
+		std::vector<double> numbers = {};
+		std::vector<double> expectedResult = {};
+		ProcessVector(numbers);
+		BOOST_CHECK(numbers == expectedResult);
+	}
+	BOOST_AUTO_TEST_CASE(properly_modify_vector)
+	{
+		std::vector<double> numbers = { 5, 1, 7 };
+		std::vector<double> expectedResult = { 1, 5, 7 };
+		SortingVector(numbers);
+		BOOST_CHECK(numbers == expectedResult);
+	}
 BOOST_AUTO_TEST_SUITE_END()
 
 BOOST_AUTO_TEST_SUITE(ProcessVector_function)

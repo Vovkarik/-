@@ -27,8 +27,7 @@ void SortingVector(std::vector<double> & numbers)
 	std::sort(numbers.begin(), numbers.end());
 }
 
-void OutputNumbers(std::vector<double> & numbers)
+void OutputVector(std::vector<double> & numbers)
 {
-	SortingVector(numbers);
 	std::copy(numbers.begin(), numbers.end(), std::ostream_iterator<double>(std::cout, " "));
 }
