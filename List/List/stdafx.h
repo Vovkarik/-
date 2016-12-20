@@ -6,15 +6,13 @@
 #pragma once
 
 #include "targetver.h"
+
+#include <stdio.h>
+#include <tchar.h>
 #include <iostream>
-#include <vector>
-#include <string>
-#include <algorithm>
-#include <iomanip>
+#include <cstdio>
+#include <cstdlib>
 #include <iterator>
-#include <boost/algorithm/string/split.hpp>
-#include <boost/algorithm/string.hpp>
-#include <boost/lexical_cast.hpp>
-#include <iterator>
+
 
 // TODO: Установите здесь ссылки на дополнительные заголовки, требующиеся для программы

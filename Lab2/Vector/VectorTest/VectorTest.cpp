@@ -15,7 +15,7 @@ BOOST_AUTO_TEST_SUITE(GetNumbers_function)
 		std::vector<double> numbers = GetNumbers(inputString);
 		BOOST_CHECK_EQUAL(numbers[3], 4);
 		inputString = "1 2 3 4 5 3 4 4 3";
-		BOOST_CHECK_EQUAL(GetNumbers(inputString).size(), 9);
+		BOOST_CHECK(GetNumbers(inputString).size() == 9);
 	}
 BOOST_AUTO_TEST_SUITE_END()
 
