@@ -4,5 +4,7 @@
 
 #include "stdafx.h"
 
+#define D_SCL_SECURE_NO_WARNINGS
+
 // TODO: Установите ссылки на любые требующиеся дополнительные заголовки в файле STDAFX.H
 // , а не в данном файле
