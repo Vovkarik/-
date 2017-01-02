@@ -12,6 +12,6 @@
 #include <stdexcept>
 #include <string>
 #include <iostream>
-#include <boost/regex/v4/regex.hpp>
+#include <regex>
 #include <boost/lexical_cast.hpp>
 // TODO: Установите здесь ссылки на дополнительные заголовки, требующиеся для программы

@@ -11,6 +11,11 @@ BOOST_AUTO_TEST_SUITE(HtmlDecode_function)
 		BOOST_CHECK_EQUAL(HtmlDecode(""), "");
 	}
 
+BOOST_AUTO_TEST_CASE(returns_empty_string_if_input_empty_strin2g)
+{
+	BOOST_CHECK_EQUAL(HtmlDecode("&amp;amp;"), "&amp;");
+}
+
 	BOOST_AUTO_TEST_CASE(returns_source_string_if_it_does_not_have_HTML_syntax)
 	{
 		string strWithoutHtmlSyntax = "This is the string without HTML syntax";

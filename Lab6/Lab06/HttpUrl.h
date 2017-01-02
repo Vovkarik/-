@@ -18,6 +18,8 @@ public:
 	std::string GetDomain() const;
 	Protocol GetProtocol() const;
 	unsigned short GetPort() const;
+	std::string GetDocument() const;
+	std::string ProtocolToString() const;
 private:
 	std::string m_url;
 	std::string m_domain;
@@ -25,8 +27,11 @@ private:
 	Protocol m_protocol;
 	unsigned short m_port;
 
-	std::string ProtocolToString() const;
-	Protocol StringToProtocol(std::string const& protocol) const;
+	Protocol ParseProtocol(std::string & url) const;
+	std::string ParseDomain(std::string & url) const;
+	unsigned short ParsePort(std::string & url) const;
+	std::string CHttpUrl::ParseDocument(std::string &url) const;
+	Protocol StringToProtocol(std::string const& protocol) const; 
 };
 
 
