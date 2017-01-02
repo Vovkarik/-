@@ -2,18 +2,16 @@
 #include "HttpUrl.h"
 #include "UrlParsingError.h"
 
-std::regex ex("(http|https)://([^/ :]+):?([^/ ]*)(/?[^ #?]*)");
+std::regex ex("([^/ :]+)://([^/ :]+):?([^/ ]*)(/?[^ #?]*)");
 std::cmatch what;
 
 CHttpUrl::CHttpUrl(std::string const& url)
 {
 	std::string urlCopy(url);
-	if (std::regex_search(url.c_str(), what, ex)) {
-		m_protocol = ParseProtocol(urlCopy);
-		m_domain = ParseDomain(urlCopy);
-		m_port = ParsePort(urlCopy);
-		m_document = ParseDocument(urlCopy);
-	}
+	m_protocol = ParseProtocol(urlCopy);
+	m_domain = ParseDomain(urlCopy);
+	m_port = ParsePort(urlCopy);
+	m_document = ParseDocument(urlCopy);
 };
 
 CHttpUrl::CHttpUrl(
@@ -82,20 +80,26 @@ std::string CHttpUrl::GetDocument() const
 
 Protocol CHttpUrl::ParseProtocol(std::string &url) const
 {
-	size_t position = url.find("://");
-	if (position == std::string::npos)
+	Protocol protocol;
+	if (std::regex_search(url.c_str(), what, ex))
+	{
+		protocol = StringToProtocol(std::string(what[1].first, what[1].second));
+	}
+	else
 	{
 		throw CUrlParsingError("Protocol parsing error");
 	}
-	Protocol protocol = StringToProtocol(std::string(what[1].first, what[1].second));
 	return protocol;
 }
 
 std::string CHttpUrl::ParseDomain(std::string &url) const
 {
-	
-	std::string domain = std::string(what[2].first, what[2].second);
-	if (domain.empty())
+	std::string domain;
+	if (std::regex_search(url.c_str(), what, ex))
+	{
+		domain = std::string(what[2].first, what[2].second);
+	}
+	else
 	{
 		throw CUrlParsingError("Domain parsing error");
 	}
@@ -125,10 +129,41 @@ unsigned short CHttpUrl::ParsePort(std::string &url) const
 
 std::string CHttpUrl::ParseDocument(std::string &url) const
 {
-	if (url.find(" ") != std::string::npos)
+	std::string document;
+	if (std::regex_search(url.c_str(), what, ex))
+	{
+		document = std::string(what[4].first, what[4].second);
+	}
+	else
 	{
 		throw CUrlParsingError("Document parsing error");
 	}
-	std::string document = std::string(what[4].first, what[4].second);
 	return document;
+}
+
+void PrintInfo(CHttpUrl const& url)
+{
+
+	std::cout << "Protocol " << url.ProtocolToString() << "\n"
+		<< "Domain " << url.GetDomain() << "\n"
+		<< "Port " << url.GetPort() << "\n"
+		<< "Document " << url.GetDocument() << std::endl;
+}
+
+int main()
+{
+	std::string url;
+	while (std::getline(std::cin, url))
+	{
+		try
+		{
+			CHttpUrl httpUrl(url);
+			PrintInfo(url);
+		}
+		catch (CUrlParsingError const& error)
+		{
+			std::cout << error.what() << std::endl;
+		}
+	}
+	return 0;
 }
