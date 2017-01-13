@@ -2,8 +2,8 @@
 #include "HttpUrl.h"
 #include "UrlParsingError.h"
 
-std::regex ex("([^/ :]+)://([^/ :]+):?([^/ ]*)(/?[^ #?]*)");
-std::cmatch what;
+std::regex ex("(http|https)://([^/ :]+):?([^/ ]*)(/?[^ #?]*)");
+std::smatch what;
 
 CHttpUrl::CHttpUrl(std::string const& url)
 {
@@ -81,7 +81,7 @@ std::string CHttpUrl::GetDocument() const
 Protocol CHttpUrl::ParseProtocol(std::string &url) const
 {
 	Protocol protocol;
-	if (std::regex_search(url.c_str(), what, ex))
+	if (std::regex_search(url, what, ex))
 	{
 		protocol = StringToProtocol(std::string(what[1].first, what[1].second));
 	}
@@ -95,7 +95,7 @@ Protocol CHttpUrl::ParseProtocol(std::string &url) const
 std::string CHttpUrl::ParseDomain(std::string &url) const
 {
 	std::string domain;
-	if (std::regex_search(url.c_str(), what, ex))
+	if (std::regex_search(url, what, ex))
 	{
 		domain = std::string(what[2].first, what[2].second);
 	}
@@ -130,7 +130,7 @@ unsigned short CHttpUrl::ParsePort(std::string &url) const
 std::string CHttpUrl::ParseDocument(std::string &url) const
 {
 	std::string document;
-	if (std::regex_search(url.c_str(), what, ex))
+	if (std::regex_search(url, what, ex))
 	{
 		document = std::string(what[4].first, what[4].second);
 	}
