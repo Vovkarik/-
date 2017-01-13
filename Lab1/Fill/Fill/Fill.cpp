@@ -12,8 +12,7 @@ bool ValidateArgumentsCount(size_t argc)
 {
 	if (argc != 3)
 	{
-		cout << "Invalid arguments count." << endl <<
-			"Usage: fill.exe <input file> <output file>" << endl;
+		cout << "Invalid arguments count." << endl << "Usage: fill.exe <input file> <output file>" << endl;
 		return false;
 	}
 	return true;
@@ -26,7 +25,6 @@ bool ValidateFiles(const ifstream & input, const ofstream & output)
 		cout << "Failed to open file for reading" << endl;
 		return false;
 	}
-
 	return true;
 }
 
@@ -67,7 +65,6 @@ void FindPointToFill(vector<string> & lines)
 {
 	vector< pair<size_t, size_t> > startPoints;
 	IdentifymarkersPositions(startPoints, lines);
-
 	for (size_t i = 0; i < startPoints.size(); i++)
 	{
 		pair<size_t, size_t> & point = startPoints[i];
