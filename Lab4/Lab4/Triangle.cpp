@@ -1,7 +1,6 @@
 #include "stdafx.h"
 #include "Triangle.h"
 
-
 CTriangle::CTriangle(Point const& vertex1, Point const& vertex2, Point const& vertex3, std::string const& outlineColor, std::string const& fillColor)
 	: m_outlineColor(outlineColor)
 	, m_fillColor(fillColor)

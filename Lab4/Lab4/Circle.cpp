@@ -1,8 +1,11 @@
 #include "stdafx.h"
 #include "Circle.h"
+#include "ISolidShape.h"
+#include "Point.h"
 
 CCircle::CCircle(Point const& center, double radius, std::string const& outlineColor, std::string const& fillColor)
-	: m_center(center)
+	: ISolidShape("Circle")
+	, m_center(center)
 	, m_radius(radius)
 	, m_outlineColor(outlineColor)
 	, m_fillColor(fillColor)
