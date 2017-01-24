@@ -109,7 +109,7 @@ std::string CHttpUrl::ParseDomain(std::string &url) const
 unsigned short CHttpUrl::ParsePort(std::string &url) const
 {
 	unsigned short port;
-	if (url[0] == ':')
+	if (std::regex_search(url, what, ex))
 	{
 		try
 		{

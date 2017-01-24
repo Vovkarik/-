@@ -1,24 +1,21 @@
 #include "stdafx.h"
-#include <boost/algorithm/string/replace.hpp>
 #include <boost/test/output/compiler_log_formatter.hpp>
+#include <boost/algorithm/string/replace.hpp>
 
-using namespace std;
-
-using boost::unit_test::test_unit_type;
-
+/*
+Данный класс управляет формаитрованием журнала запуска тестов
+Для того, чтобы увидеть результат, приложение должно быть запущено с ключём --log-level=test_suite (см. Post-build event в настройках проекта)
+*/
 class SpecLogFormatter :
 	public boost::unit_test::output::compiler_log_formatter
 {
 	virtual void test_unit_start(std::ostream &os, boost::unit_test::test_unit const& tu) override
 	{
-		os << string(m_indent, ' ') << boost::replace_all_copy(tu.p_name.get(), "_", " ") << endl;
-
+		os << std::string(m_indent, ' ') << boost::replace_all_copy(tu.p_name.get(), "_", " ") << std::endl;
 		m_indent += 2;
 	}
 
-
-
-	virtual void test_unit_finish(ostream & /*os*/, boost::unit_test::test_unit const& /*tu*/, unsigned long /*elapsed*/) override
+	virtual void test_unit_finish(std::ostream &, boost::unit_test::test_unit const&, unsigned long) override
 	{
 		m_indent -= 2;
 	}
@@ -26,7 +23,7 @@ class SpecLogFormatter :
 	int m_indent = 0;
 };
 
-boost::unit_test::test_suite* init_unit_test_suite(int /*argc*/, char* /*argv*/[])
+boost::unit_test::test_suite* init_unit_test_suite(int, char*[])
 {
 	boost::unit_test::unit_test_log.set_formatter(new SpecLogFormatter);
 	boost::unit_test::framework::master_test_suite().p_name.value = "All tests";
