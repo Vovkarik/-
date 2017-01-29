@@ -3,6 +3,7 @@
 
 template<typename ValueType>
 CIterator<ValueType>::ÑIterator(ValueType * p)
+	: p(p)
 {
 
 }

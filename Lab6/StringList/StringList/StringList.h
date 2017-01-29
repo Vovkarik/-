@@ -6,8 +6,9 @@
 class ÑStringList
 {
 public:
-	ÑStringList() = default;
+	CStringList()
 	CStringList(const CStringList & list);
+	~CStringList();
 	void PushBack(const std::string & data);
 	void PushFront(const std::string & data);
 	size_t GetSize() const;

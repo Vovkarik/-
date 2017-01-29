@@ -3,9 +3,6 @@
 template <typename ValueType>
 class CIterator: public std::iterator<std::input_iterator_tag, ValueType>
 {
-	friend class CStringList;
-private:
-	ÑIterator(ValueType* p);
 public:
 	CIterator(const CIterator &it);
 	bool operator!=(CIterator const& other) const;
@@ -14,5 +11,7 @@ public:
 	ÑIterator& operator++();
 private:
 	ValueType* p;
+	ÑIterator(ValueType* p);
+	friend class CStringList;
 };
 
