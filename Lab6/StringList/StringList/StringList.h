@@ -3,10 +3,10 @@
 #include "Iterator.h"
 #include "ListNode.h"
 
-class ÑStringList
+class CStringList
 {
 public:
-	CStringList()
+	CStringList();
 	CStringList(const CStringList & list);
 	~CStringList();
 	void PushBack(const std::string & data);

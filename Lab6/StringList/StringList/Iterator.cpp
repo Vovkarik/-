@@ -2,7 +2,7 @@
 #include "Iterator.h"
 
 template<typename ValueType>
-CIterator<ValueType>::ÑIterator(ValueType * p)
+CIterator<ValueType>::CIterator(ValueType * p)
 	: p(p)
 {
 
