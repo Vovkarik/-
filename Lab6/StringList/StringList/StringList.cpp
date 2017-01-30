@@ -5,9 +5,9 @@
 CStringList::CStringList(const CStringList & list)
 {
 	CStringList tmp;
-	for (CIterator<std::string> it = list.begin(); it != list.end(); it->next)
+	for (CIterator<std::string> it = list.cbegin(); it != list.cend(); it->next)
 	{
-		tmp.PushBack(elem);
+		tmp.PushBack(it->data);
 	}
 	std::swap(m_firstNode, tmp.m_firstNode);
 	std::swap(m_lastNode, tmp.m_lastNode);

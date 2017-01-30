@@ -9,7 +9,7 @@ public:
 	CIterator(ListNode* value)
 		m_node(value)
 	{
-	}
+	};
 	bool operator!=(CIterator const& other) const;
 	bool operator==(CIterator const& other) const; //need for BOOST_FOREACH
 	typename CIterator::reference operator*() const;
