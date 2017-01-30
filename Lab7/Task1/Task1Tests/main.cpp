@@ -2,7 +2,6 @@
 //
 
 #include "stdafx.h"
-#include "../Task1/FindMax.h"
 #include <boost/test/output/compiler_log_formatter.hpp>
 
 class SpecLogFormatter :

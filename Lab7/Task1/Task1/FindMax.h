@@ -37,7 +37,7 @@ bool FindMax<const char*>(std::vector<const char*> const& arr, const char* & max
 				maxValueStr = (char*)*first;
 			}
 		}
-			maxValue = maxValueStr;
+		maxValue = maxValueStr;
 		return true;
 	}
 	else return false;

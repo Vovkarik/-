@@ -10,7 +10,6 @@
 #include <stdio.h>
 #include <tchar.h>
 #include <vector>
-#include <iostream>
 #include <string>
 
 // TODO: Установите здесь ссылки на дополнительные заголовки, требующиеся для программы
