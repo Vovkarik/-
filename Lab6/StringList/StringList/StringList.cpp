@@ -1,6 +1,5 @@
 #include "stdafx.h"
 #include "StringList.h"
-#include <list>
 
 CStringList::CStringList(const CStringList & list)
 {
@@ -15,6 +14,78 @@ CStringList::CStringList(const CStringList & list)
 }
 
 CStringList::~CStringList()
+{
+	while (m_lastNode)
+	{
+		m_lastNode->next = nullptr;
+		m_lastNode = m_lastNode->prev;
+	}
+	m_firstNode = nullptr;
+	m_size = 0;
+}
+
+void CStringList::PushBack(const std::string & data)
+{
+	try
+	{
+		auto newNode = std::make_unique<ListNode>(data, m_lastNode, nullptr);
+		ListNode *newLastNode = newNode.get();
+		if (m_lastNode)
+		{
+			m_lastNode->next = std::move(newNode);
+		}
+		else
+		{
+			m_firstNode = std::move(newNode);
+		}
+		m_lastNode = newLastNode;
+		m_lastNode->next = nullptr;
+		++m_size;
+	}
+	catch (...)
+	{
+		throw;
+	}
+}
+
+void CStringList::PushFront(const std::string & data)
+{
+	try
+	{
+		auto newNode = std::make_unique<ListNode>(data, nullptr, std::move(m_firstNode));
+		if (newNode->prev)
+		{
+			newNode->prev->next = std::move(newNode);
+		}
+		else if (newNode->next)
+		{
+			newNode->next->prev = newNode.get();
+		}
+		if (!newNode->next)
+		{
+			m_lastNode = newNode.get();
+		}
+		m_firstNode = std::move(newNode);
+		m_firstNode->prev = nullptr;
+		m_size++;
+	}
+	catch (...)
+	{
+		throw;
+	}
+}
+
+size_t CStringList::GetSize() const
+{
+	return m_size;
+}
+
+bool CStringList::IsEmpty() const
+{
+	return m_size == 0;
+}
+
+void CStringList::Clear()
 {
 	while (m_lastNode)
 	{

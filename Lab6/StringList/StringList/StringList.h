@@ -6,7 +6,7 @@
 class CStringList
 {
 public:
-	CStringList();
+	CStringList() = default;
 	CStringList(const CStringList & list);
 	~CStringList();
 	void PushBack(const std::string & data);
@@ -14,8 +14,6 @@ public:
 	size_t GetSize() const;
 	bool IsEmpty() const;
 	void Clear();
-	void Insert(const CIterator<std::string> & it, std::string data);
-	void Erase(const CIterator<std::string> & it);
 	CIterator<std::string> begin();
 	CIterator<std::string> end();
 	const CIterator<std::string> cbegin() const;
