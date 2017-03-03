@@ -2,15 +2,15 @@
 #include "Iterator.h"
 
 template<typename ValueType>
-CIterator<ValueType>::CIterator(ValueType * pointer)
-	: pointer(pointer)
+CIterator<ValueType>::CIterator(ValueType * p)
+	: p(p)
 {
 
 }
 
 template<typename ValueType>
 CIterator<ValueType>::CIterator(const CIterator & it) 
-	: pointer(it.pointer)
+	: p(it.p)
 {
 
 }
@@ -18,24 +18,24 @@ CIterator<ValueType>::CIterator(const CIterator & it)
 template<typename ValueType>
 bool CIterator<ValueType>::operator!=(CIterator const& other) const
 {
-	return pointer != other.pointer;
+	return p != other.p;
 }
 
 template<typename ValueType>
 bool CIterator<ValueType>::operator==(CIterator const& other) const
 {
-	return pointer == other.pointer;
+	return p == other.p;
 }
 
 template<typename ValueType>
 typename CIterator<ValueType>::reference CIterator<ValueType>::operator*() const
 {
-	return *pointer;
+	return *p;
 }
 
 template<typename ValueType>
 CIterator<ValueType> &CIterator<ValueType>::operator++()
 {
-	++pointer;
+	++p;
 	return *this;
 }
