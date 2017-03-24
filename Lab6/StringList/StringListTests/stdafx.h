@@ -15,5 +15,9 @@
 #include <boost/test/unit_test.hpp>
 #include <string>
 #include <vector>
-
+#include <stdio.h>
+#include <tchar.h>
+#include <memory>
+#include <iterator>
+#include <cassert>
 // TODO: Установите здесь ссылки на дополнительные заголовки, требующиеся для программы

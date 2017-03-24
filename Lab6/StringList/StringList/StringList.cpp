@@ -1,16 +1,12 @@
 #include "stdafx.h"
 #include "StringList.h"
 
-CStringList::CStringList(const CStringList & list)
+CStringList::CStringList()
 {
-	CStringList tmp;
-	for (CIterator<std::string> it = list.cbegin(); it != list.cend(); it->next)
-	{
-		tmp.PushBack(it->data);
-	}
-	std::swap(m_firstNode, tmp.m_firstNode);
-	std::swap(m_lastNode, tmp.m_lastNode);
-	m_size = tmp.m_size;
+	m_firstNode = std::make_unique<ListNode>("", nullptr, nullptr);
+	m_firstNode->next = std::make_unique<ListNode>("", m_firstNode.get(), nullptr);
+	m_lastNode = m_firstNode->next.get();
+	m_size = 0;
 }
 
 CStringList::~CStringList()
@@ -24,27 +20,34 @@ CStringList::~CStringList()
 	m_size = 0;
 }
 
+CStringList::CStringList(const CStringList & list)
+{
+	if (this != &list)
+	{
+		CStringList tmp;
+		for (CIterator<const std::string> it = list.cbegin(); it != list.cend(); ++it)
+		{
+			tmp.PushBack(it->data);
+		}
+		std::swap(m_firstNode, tmp.m_firstNode);
+		std::swap(m_lastNode, tmp.m_lastNode);
+		m_size = tmp.m_size;
+	}
+	else
+	{
+		throw("Unable to copy list into itself");
+	}
+}
+
 void CStringList::PushBack(const std::string & data)
 {
 	try
 	{
-		auto newNode = std::make_unique<ListNode>(data, m_lastNode, nullptr);
-		ListNode *newLastNode = newNode.get();
-		if (m_lastNode)
-		{
-			m_lastNode->next = std::move(newNode);
-		}
-		else
-		{
-			m_firstNode = std::move(newNode);
-		}
-		m_lastNode = newLastNode;
-		m_lastNode->next = nullptr;
-		++m_size;
+		Insert(end(), data);
 	}
 	catch (...)
 	{
-		throw;
+		throw("Unable to push data to the end of list");
 	}
 }
 
@@ -52,26 +55,11 @@ void CStringList::PushFront(const std::string & data)
 {
 	try
 	{
-		auto newNode = std::make_unique<ListNode>(data, nullptr, std::move(m_firstNode));
-		if (newNode->prev)
-		{
-			newNode->prev->next = std::move(newNode);
-		}
-		else if (newNode->next)
-		{
-			newNode->next->prev = newNode.get();
-		}
-		if (!newNode->next)
-		{
-			m_lastNode = newNode.get();
-		}
-		m_firstNode = std::move(newNode);
-		m_firstNode->prev = nullptr;
-		m_size++;
+		Insert(begin(), data);
 	}
 	catch (...)
 	{
-		throw;
+		throw("Unable to push data to begin of the list");
 	}
 }
 
@@ -96,42 +84,65 @@ void CStringList::Clear()
 	m_size = 0;
 }
 
+void CStringList::Erase(const CIterator<std::string> & it)
+{
+	if (m_size == 0)
+	{
+		throw("List is empty");
+	}
+	else if (it == end())
+	{
+		throw("Unable to erase end iterator");
+	}
+	it->next->prev = it->prev;
+	it->prev->next = std::move(it->next);
+	m_size--;
+}
+
+void CStringList::Insert(const CIterator<std::string> & it, std::string data)
+{
+	std::unique_ptr<ListNode> newNode = std::make_unique<ListNode>(data, it->prev, std::move(it->prev->next));
+	it->prev = newNode.get();
+	newNode->prev->next = std::move(newNode);
+	m_size++;
+}
+
 CIterator<std::string> CStringList::begin()
 {
-	return CIterator<std::string>(m_firstNode.get());
+	return CIterator<std::string>(m_firstNode->next.get());
 }
 
 CIterator<std::string> CStringList::end()
 {
-	return CIterator<std::string>(m_lastNode->next.get());
-}
-
-const CIterator<std::string> CStringList::cbegin() const
-{
-	return CIterator<std::string>(m_firstNode.get());
-}
-
-const CIterator<std::string> CStringList::cend() const
-{
-	return CIterator<std::string>(m_lastNode->next.get());
-}
-
-CIterator<std::string> CStringList::rbegin()
-{
 	return CIterator<std::string>(m_lastNode);
 }
 
-CIterator<std::string> CStringList::rend()
+const CIterator<const std::string> CStringList::cbegin() const
 {
-	return CIterator<std::string>(m_firstNode->prev);
+	return CIterator<const std::string>(m_firstNode->next.get());
 }
 
-const CIterator<std::string> CStringList::crbegin() const
+const CIterator<const std::string> CStringList::cend() const
 {
-	return CIterator<std::string>(m_lastNode);
+	return CIterator<const std::string>(m_lastNode);
 }
 
-const CIterator<std::string> CStringList::crend() const
+std::reverse_iterator<CIterator<std::string>> CStringList::rbegin()
 {
-	return CIterator<std::string>(m_firstNode->prev);
+	return std::reverse_iterator<CIterator<std::string>>(m_lastNode);
+}
+
+std::reverse_iterator<CIterator<std::string>> CStringList::rend()
+{
+	return std::reverse_iterator<CIterator<std::string>>(m_firstNode->next.get());
+}
+
+const std::reverse_iterator<CIterator<const std::string>> CStringList::crbegin() const
+{
+	return std::reverse_iterator<CIterator<const std::string>>(m_lastNode);
+}
+
+const std::reverse_iterator<CIterator<const std::string>> CStringList::crend() const
+{
+	return std::reverse_iterator<CIterator<const std::string>>(m_firstNode->next.get());
 }

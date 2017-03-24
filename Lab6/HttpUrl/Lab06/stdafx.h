@@ -12,7 +12,7 @@
 #include <stdexcept>
 #include <string>
 #include <iostream>
-#include <regex>
 #include <boost/lexical_cast.hpp>
-
+#include <math.h>
+#include <boost/math/special_functions/fpclassify.hpp>
 // TODO: Установите здесь ссылки на дополнительные заголовки, требующиеся для программы

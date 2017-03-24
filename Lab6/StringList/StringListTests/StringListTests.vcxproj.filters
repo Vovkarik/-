@@ -47,9 +47,6 @@
     <ClCompile Include="..\StringList\StringList.cpp">
       <Filter>Файлы исходного кода</Filter>
     </ClCompile>
-    <ClCompile Include="..\StringList\Iterator.cpp">
-      <Filter>Файлы исходного кода</Filter>
-    </ClCompile>
     <ClCompile Include="..\StringList\ListNode.cpp">
       <Filter>Файлы исходного кода</Filter>
     </ClCompile>

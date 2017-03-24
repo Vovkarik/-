@@ -2,9 +2,6 @@
 #include "HttpUrl.h"
 #include "UrlParsingError.h"
 
-std::regex ex("(http|https)://([^/ :]+):?([^/ ]*)(/?[^ #?]*)");
-std::smatch what;
-
 CHttpUrl::CHttpUrl(std::string const& url)
 {
 	std::string urlCopy(url);
@@ -22,7 +19,7 @@ CHttpUrl::CHttpUrl(
 	:m_domain(domain)
 	, m_document(document)
 	, m_protocol(protocol)
-	, m_port(port)
+	, m_port(port)(_CRT_CONST_CORRECT_OVERLOADS)
 {
 };
 
@@ -81,9 +78,18 @@ std::string CHttpUrl::GetDocument() const
 Protocol CHttpUrl::ParseProtocol(std::string &url) const
 {
 	Protocol protocol;
-	if (std::regex_search(url, what, ex))
+	if (url.substr(0, 7) == "http://" || url.substr(0, 8) == "https://")
 	{
-		protocol = StringToProtocol(std::string(what[1].first, what[1].second));
+		if (url.substr(0, 7) == "http://")
+		{
+			protocol = HTTP;
+			url = url.substr(7);
+		}
+		else
+		{
+			protocol = HTTPS;
+			url = url.substr(8);
+		}
 	}
 	else
 	{
@@ -95,9 +101,11 @@ Protocol CHttpUrl::ParseProtocol(std::string &url) const
 std::string CHttpUrl::ParseDomain(std::string &url) const
 {
 	std::string domain;
-	if (std::regex_search(url, what, ex))
+	auto domainEnd = url.find(':');
+	if (domainEnd == std::string::npos)
 	{
-		domain = std::string(what[2].first, what[2].second);
+		domainEnd = url.find("/");
+		domain = url.substr(0, domainEnd);
 	}
 	else
 	{
@@ -109,11 +117,15 @@ std::string CHttpUrl::ParseDomain(std::string &url) const
 unsigned short CHttpUrl::ParsePort(std::string &url) const
 {
 	unsigned short port;
-	if (std::regex_search(url, what, ex))
+	if (url[0] == ':')
 	{
+		size_t endOfPort = url.find('/');
+		std::string portString = url.substr(1, endOfPort - 1);
+		url = url.substr(endOfPort);
+		if (portString.empty()) throw CUrlParsingError("Port parsing error");
 		try
 		{
-			port = boost::lexical_cast<unsigned short>(std::string(what[3].first, what[3].second));
+			port = boost::lexical_cast<unsigned short>(portString);
 		}
 		catch (boost::bad_lexical_cast const& error)
 		{
@@ -127,10 +139,11 @@ unsigned short CHttpUrl::ParsePort(std::string &url) const
 	return port;
 }
 
-std::string CHttpUrl::ParseDocument(std::string &url) const
+::string CHttpUrl::ParseDocument(std::string &url) const
 {
-	std::string document;
-	if (std::regex_search(url, what, ex))
+	std::string document;gmtime
+	
+	(std::regex_search(url, what, ex))
 	{
 		document = std::string(what[4].first, what[4].second);
 	}

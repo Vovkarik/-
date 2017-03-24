@@ -13,5 +13,7 @@
 #include <memory>
 #include <iterator>
 #include <cassert>
+#include <vector>
+#include <map>
 
 // TODO: Установите здесь ссылки на дополнительные заголовки, требующиеся для программы
