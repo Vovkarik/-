@@ -31,6 +31,12 @@ public:
 		return !(m_node == other.m_node);
 	}
 
+	CIterator& operator=(CIterator const& other)
+	{
+		m_node = other.m_node;
+		return *this;
+	}
+
 	CIterator& operator=(CIterator && other)
 	{
 		m_node = std::move(other.m_node);
@@ -39,32 +45,98 @@ public:
 
 	typename CIterator::reference operator*() const
 	{
-		try
+		if (m_node != nullptr && m_node->next != nullptr && m_node->prev != nullptr)
 		{
 			return m_node->data;
 		}
-		catch (...)
+		else
 		{
-			throw("Impossible to return data from unexistable node");
+			throw std::runtime_error("Can't get value of this iterator");
 		}
 	}
 
 	CIterator& operator++()
 	{
-		if (m_node != nullptr) m_node = m_node->next.get();
+		if (m_node != nullptr && m_node->next != nullptr)
+		{
+			m_node = m_node->next.get();
+		}
+		else
+		{
+			throw std::out_of_range("Can't get increment of this iterator");
+		}
 		return *this;
 	}
 
 	CIterator& operator--()
 	{
-		if (m_node != nullptr) m_node = m_node->prev;
+		if (m_node != nullptr && m_node->prev != nullptr)
+		{
+			m_node = m_node->prev;
+		}
+		else
+		{
+			throw std::out_of_range("Can't get decrement of this iterator");
+		}
 		return *this;
 	}
-	ListNode* operator->()const
+
+	CIterator& operator++(int)
 	{
-		return m_node;
+		auto tmp = *this;
+		if (m_node != nullptr && m_node->next != nullptr)
+		{
+			m_node = m_node->next.get();
+		}
+		else
+		{
+			throw std::out_of_range("Can't get increment of this iterator");
+		}
+		return tmp;
+	}
+
+	CIterator& operator--(int)
+	{
+		auto tmp = *this;
+		if (m_node != nullptr && m_node->prev != nullptr)
+		{
+			m_node = m_node->prev;
+		}
+		else
+		{
+			throw std::out_of_range("Can't get increment of this iterator");
+		}
+		return tmp;
+	}
+
+	std::string operator->()const
+	{
+		return m_node->data;
 	}
 private:
+	void Increment()
+	{
+		if (m_node != nullptr && m_node->next != nullptr)
+		{
+			m_node = m_node->next.get();
+		}
+		else
+		{
+			throw std::out_of_range("Can't get increment of this iterator");
+		}
+	}
+	void Decrement()
+	{
+		if (m_node != nullptr && m_node->prev != nullptr)
+		{
+			m_node = m_node->next.get();
+		}
+		else
+		{
+			throw std::out_of_range("Can't get increment of this iterator");
+		}
+	}
 	ListNode* m_node = nullptr;
+	friend class CStringList;
 };
 

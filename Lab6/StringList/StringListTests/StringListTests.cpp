@@ -13,6 +13,12 @@ void VerifyList(CStringList & list, const std::vector<std::string> & expectedEle
 	}
 }
 
+CStringList CreateList(const CStringList myList)
+{
+	CStringList copiedList(myList);
+	return copiedList;
+}
+
 BOOST_AUTO_TEST_SUITE(StringList_tests)
 
 	struct StringListFix
@@ -122,6 +128,22 @@ BOOST_AUTO_TEST_SUITE(StringList_tests)
 		}
 	}
 
+	BOOST_AUTO_TEST_CASE(iterator_have_postfix_form)
+	{
+		StringListFix expectedVector;
+		CStringList myList;
+		for (size_t i = 0; i < expectedVector.bigList.size(); i++)
+		{
+			myList.PushBack(expectedVector.bigList[i]);
+		}
+		size_t counter = 0;
+		for (auto it = myList.begin(); it != myList.end(); it++)
+		{
+			BOOST_CHECK_EQUAL(*it, expectedVector.bigList[counter]);
+			counter++;
+		}
+	}
+
 	BOOST_AUTO_TEST_CASE(have_const_iterators_at_the_begin_and_the_end_of_string_list)
 	{
 		StringListFix expectedVector;
@@ -165,6 +187,48 @@ BOOST_AUTO_TEST_SUITE(StringList_tests)
 		CStringList copiedList(myList);
 		VerifyList(myList, expectedVector.bigList);
 		VerifyList(copiedList, expectedVector.bigList);
+	}
+
+	BOOST_AUTO_TEST_CASE(have_move_constructor)
+	{
+		StringListFix expectedVector;
+		CStringList myList;
+		for (size_t i = 0; i < expectedVector.bigList.size(); ++i)
+		{
+			myList.PushBack(expectedVector.bigList[i]);
+		}
+		CStringList copiedList = CreateList(myList);
+		VerifyList(myList, expectedVector.bigList);
+		VerifyList(copiedList, expectedVector.bigList);
+	}
+
+	BOOST_AUTO_TEST_CASE(have_alignment_operator)
+	{
+		StringListFix expectedVector;
+		CStringList myList;
+		for (size_t i = 0; i < expectedVector.bigList.size(); ++i)
+		{
+			myList.PushBack(expectedVector.bigList[i]);
+		}
+		CStringList copiedList = myList;
+		VerifyList(myList, expectedVector.bigList);
+		VerifyList(copiedList, expectedVector.bigList);
+	}
+
+	BOOST_AUTO_TEST_CASE(proprely_throws_exeptions)
+	{
+		CStringList myList;
+		BOOST_REQUIRE_THROW(myList.Erase(myList.begin()), std::out_of_range);
+		BOOST_REQUIRE_THROW(*myList.end(), std::runtime_error);
+		StringListFix expectedVector;
+		for (size_t i = 0; i < expectedVector.bigList.size(); ++i)
+		{
+			myList.PushBack(expectedVector.bigList[i]);
+		}
+		BOOST_REQUIRE_THROW(myList.Erase(myList.end()), std::runtime_error);
+		BOOST_REQUIRE_THROW(myList.end()++, std::out_of_range);
+		BOOST_REQUIRE_THROW(++myList.end(), std::out_of_range);
+		BOOST_REQUIRE_THROW(----myList.begin(), std::out_of_range);
 	}
 
 BOOST_AUTO_TEST_SUITE_END()
