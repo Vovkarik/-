@@ -220,6 +220,7 @@ BOOST_AUTO_TEST_SUITE(StringList_tests)
 		CStringList myList;
 		BOOST_REQUIRE_THROW(myList.Erase(myList.begin()), std::out_of_range);
 		BOOST_REQUIRE_THROW(*myList.end(), std::runtime_error);
+		BOOST_REQUIRE_THROW(myList.rend()--, std::out_of_range);
 		StringListFix expectedVector;
 		for (size_t i = 0; i < expectedVector.bigList.size(); ++i)
 		{

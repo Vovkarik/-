@@ -84,7 +84,7 @@ public:
 	CIterator& operator++(int)
 	{
 		auto tmp = *this;
-		if (m_node != nullptr && m_node->next != nullptr)
+		if (tmp.m_node != nullptr && tmp.m_node->next != nullptr)
 		{
 			m_node = m_node->next.get();
 		}
@@ -97,8 +97,8 @@ public:
 
 	CIterator& operator--(int)
 	{
-		auto tmp = *this;
-		if (m_node != nullptr && m_node->prev != nullptr)
+		CIterator tmp = *this;
+		if (tmp.m_node != nullptr && tmp.m_node->prev != nullptr)
 		{
 			m_node = m_node->prev;
 		}
@@ -114,28 +114,6 @@ public:
 		return m_node->data;
 	}
 private:
-	void Increment()
-	{
-		if (m_node != nullptr && m_node->next != nullptr)
-		{
-			m_node = m_node->next.get();
-		}
-		else
-		{
-			throw std::out_of_range("Can't get increment of this iterator");
-		}
-	}
-	void Decrement()
-	{
-		if (m_node != nullptr && m_node->prev != nullptr)
-		{
-			m_node = m_node->next.get();
-		}
-		else
-		{
-			throw std::out_of_range("Can't get increment of this iterator");
-		}
-	}
 	ListNode* m_node = nullptr;
 	friend class CStringList;
 };
