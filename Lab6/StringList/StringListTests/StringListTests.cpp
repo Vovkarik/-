@@ -19,7 +19,7 @@ CStringList CreateList(const CStringList myList)
 	return copiedList;
 }
 
-BOOST_AUTO_TEST_SUITE(StringList_tests)
+BOOST_AUTO_TEST_SUITE(StringList_class)
 
 	struct StringListFix
 	{
@@ -27,31 +27,31 @@ BOOST_AUTO_TEST_SUITE(StringList_tests)
 	};
 
 
-	BOOST_AUTO_TEST_CASE(check_first_size)
+	BOOST_AUTO_TEST_CASE(has_zero_size_on_create)
 	{
 		BOOST_CHECK_EQUAL(CStringList().GetSize(), 0);
 	}
 
-	BOOST_AUTO_TEST_CASE(check_is_empty)
+	BOOST_AUTO_TEST_CASE(empty_on_create)
 	{
 		BOOST_CHECK_EQUAL(CStringList().IsEmpty(), true);
 	}
 
-	BOOST_AUTO_TEST_CASE(input_into_the_front_of_list)
+	BOOST_AUTO_TEST_CASE(can_input_into_the_front_of_list)
 	{
 		CStringList myList;
 		myList.PushFront("Hello");
 		BOOST_CHECK_EQUAL(myList.GetSize(), 1);
 	}
 
-	BOOST_AUTO_TEST_CASE(input_into_the_back_of_list)
+	BOOST_AUTO_TEST_CASE(can_input_into_the_back_of_list)
 	{
 		CStringList myList;
 		myList.PushBack("Hello");
 		BOOST_CHECK_EQUAL(myList.GetSize(), 1);
 	}
 
-	BOOST_AUTO_TEST_CASE(push_changes_size)
+	BOOST_AUTO_TEST_CASE(push_to_it_changes_size)
 	{
 		CStringList myList;
 		myList.PushFront("First");
@@ -101,7 +101,7 @@ BOOST_AUTO_TEST_SUITE(StringList_tests)
 		BOOST_CHECK(myList.IsEmpty());
 	}
 
-	BOOST_AUTO_TEST_CASE(check_vectors_equality)
+	BOOST_AUTO_TEST_CASE(can_create_vector_equal_to_std_vector)
 	{
 		StringListFix expectedVector;
 		CStringList myList;
@@ -128,7 +128,7 @@ BOOST_AUTO_TEST_SUITE(StringList_tests)
 		}
 	}
 
-	BOOST_AUTO_TEST_CASE(iterator_have_postfix_form)
+	BOOST_AUTO_TEST_CASE(iterator_have_postfix_form_of_increment)
 	{
 		StringListFix expectedVector;
 		CStringList myList;
