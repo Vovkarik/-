@@ -55,12 +55,12 @@ CStringList::CStringList(const CStringList & list)
 
 void CStringList::PushBack(const std::string & data)
 {
-		Insert(end(), data);
+	Insert(end(), data);
 }
 
 void CStringList::PushFront(const std::string & data)
 {
-		Insert(begin(), data);
+	Insert(begin(), data);
 }
 
 size_t CStringList::GetSize() const
