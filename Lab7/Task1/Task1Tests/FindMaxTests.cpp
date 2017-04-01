@@ -50,8 +50,9 @@ BOOST_AUTO_TEST_CASE(can_find_max_element_in_vector_of_double)
 
 BOOST_AUTO_TEST_CASE(proprely_react_to_an_empty_vector)
 {
-	int maxValue;
+	int maxValue = 0;
 	BOOST_CHECK_EQUAL(FindMax(EmptyVector, maxValue), false);
+	BOOST_CHECK_EQUAL(maxValue, 0);
 }
 
 BOOST_AUTO_TEST_SUITE_END()

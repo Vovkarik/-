@@ -28,16 +28,15 @@ bool FindMax<const char*>(std::vector<const char*> const& arr, const char* & max
 	{
 		auto first = std::begin(arr);
 		auto last = std::end(arr);
-		char* maxValueStr = (char*)*first;
+		maxValue = (char*)*first;
 		++first;
 		for (; first != last; ++first)
 		{
-			if (maxValueStr < (char*)*first)
+			if (maxValue < (char*)*first)
 			{
-				maxValueStr = (char*)*first;
+				maxValue = (char*)*first;
 			}
 		}
-		maxValue = maxValueStr;
 		return true;
 	}
 	else return false;
