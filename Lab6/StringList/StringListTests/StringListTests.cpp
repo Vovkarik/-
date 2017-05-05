@@ -191,7 +191,20 @@ BOOST_AUTO_TEST_SUITE(StringList_class)
 		{
 			myList.PushBack(expectedVector.bigList[i]);
 		}
-		CStringList copiedList = copiedList(myList);
+		CStringList copiedList(std::move(myList));
+		VerifyList(myList, expectedVector.bigList);
+		VerifyList(copiedList, expectedVector.bigList);
+	}
+
+	BOOST_AUTO_TEST_CASE(have_move_operator)
+	{
+		StringListFix expectedVector;
+		CStringList myList;
+		for (size_t i = 0; i < expectedVector.bigList.size(); ++i)
+		{
+			myList.PushBack(expectedVector.bigList[i]);
+		}
+		CStringList copiedList = std::move(myList);
 		VerifyList(myList, expectedVector.bigList);
 		VerifyList(copiedList, expectedVector.bigList);
 	}
