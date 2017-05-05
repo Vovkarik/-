@@ -13,12 +13,6 @@ void VerifyList(CStringList & list, const std::vector<std::string> & expectedEle
 	}
 }
 
-CStringList CreateList(const CStringList myList)
-{
-	CStringList copiedList(myList);
-	return copiedList;
-}
-
 BOOST_AUTO_TEST_SUITE(StringList_class)
 
 	struct StringListFix
@@ -197,7 +191,7 @@ BOOST_AUTO_TEST_SUITE(StringList_class)
 		{
 			myList.PushBack(expectedVector.bigList[i]);
 		}
-		CStringList copiedList = CreateList(myList);
+		CStringList copiedList = copiedList(myList);
 		VerifyList(myList, expectedVector.bigList);
 		VerifyList(copiedList, expectedVector.bigList);
 	}

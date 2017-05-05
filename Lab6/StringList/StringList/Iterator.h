@@ -6,20 +6,12 @@ template <typename ValueType>
 class CIterator : public std::iterator<std::bidirectional_iterator_tag, ValueType>
 {
 public:
+	CIterator() = default;
+
 	CIterator(ListNode * node)
 		: m_node(node)
 	{
 	}
-
-	CIterator(const CIterator & it)
-		: m_node(it.m_node)
-	{
-	}
-
-	CIterator(CIterator && it)
-		:m_node(std::move(it.m_node))
-	{
-	};
 	
 	bool operator==(CIterator const& other) const
 	{
@@ -29,18 +21,6 @@ public:
 	bool operator!=(CIterator const& other) const
 	{
 		return !(m_node == other.m_node);
-	}
-
-	CIterator& operator=(CIterator const& other)
-	{
-		m_node = other.m_node;
-		return *this;
-	}
-
-	CIterator& operator=(CIterator && other)
-	{
-		m_node = std::move(other.m_node);
-		return *this;
 	}
 
 	typename CIterator::reference operator*() const
@@ -86,7 +66,7 @@ public:
 		auto tmp = *this;
 		if (tmp.m_node != nullptr && tmp.m_node->next != nullptr)
 		{
-			m_node = m_node->next.get();
+			++*this;
 		}
 		else
 		{
@@ -100,7 +80,7 @@ public:
 		CIterator tmp = *this;
 		if (tmp.m_node != nullptr && tmp.m_node->prev != nullptr)
 		{
-			m_node = m_node->prev;
+			--*this;
 		}
 		else
 		{

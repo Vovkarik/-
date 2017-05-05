@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "StringList.h"
+#include <list>
 
 CStringList::CStringList()
 {
@@ -25,9 +26,12 @@ CStringList::CStringList(CStringList && other)
 
 CStringList & CStringList::operator=(CStringList other)
 {
-	std::swap(m_firstNode, other.m_firstNode);
-	std::swap(m_lastNode, other.m_lastNode);
-	m_size = other.m_size;
+	if (m_firstNode != other.m_firstNode)
+	{
+		std::swap(m_firstNode, other.m_firstNode);
+		std::swap(m_lastNode, other.m_lastNode);
+		m_size = other.m_size;
+	}
 	return *this;
 }
 
@@ -75,12 +79,11 @@ bool CStringList::IsEmpty() const
 
 void CStringList::Clear()
 {
-	while (m_lastNode)
+	while (m_lastNode->next)
 	{
 		m_lastNode->next = nullptr;
 		m_lastNode = m_lastNode->prev;
 	}
-	m_firstNode = nullptr;
 	m_size = 0;
 }
 

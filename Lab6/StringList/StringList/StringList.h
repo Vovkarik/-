@@ -10,8 +10,10 @@ public:
 	CStringList(const CStringList & list);
 	~CStringList();
 	CStringList::CStringList(CStringList && rhs);
+
 	CStringList & operator = (CStringList other);
 	CStringList & operator = (CStringList && other);
+
 	void PushBack(const std::string & data);
 	void PushFront(const std::string & data);
 	size_t GetSize() const;
@@ -19,12 +21,14 @@ public:
 	void Clear();
 	void Erase(const CIterator<std::string> & it);
 	void Insert(const CIterator<std::string> & it, std::string const & data);
+
 	CIterator<std::string> begin();
 	CIterator<const std::string> CStringList::begin() const;
 	CIterator<std::string> end();
 	CIterator<const std::string> CStringList::end() const;
 	CIterator<const std::string> cbegin() const;
 	CIterator<const std::string> cend() const;
+
 	std::reverse_iterator<CIterator<std::string>> rbegin();
 	std::reverse_iterator<CIterator<const std::string>> rbegin() const;
 	std::reverse_iterator<CIterator<std::string>> rend();
