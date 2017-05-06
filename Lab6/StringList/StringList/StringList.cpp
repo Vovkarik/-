@@ -83,11 +83,13 @@ bool CStringList::IsEmpty() const
 
 void CStringList::Clear()
 {
-	while (m_lastNode->next)
+	while(m_lastNode)
 	{
 		m_lastNode->next = nullptr;
 		m_lastNode = m_lastNode->prev;
 	}
+	m_firstNode->next = std::make_unique<ListNode>("", m_firstNode.get(), nullptr);
+	m_lastNode = m_firstNode->next.get();
 	m_size = 0;
 }
 

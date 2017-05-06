@@ -9,7 +9,7 @@ public:
 	CStringList();
 	CStringList(const CStringList & list);
 	~CStringList();
-	CStringList::CStringList(CStringList && rhs);
+	CStringList(CStringList && rhs);
 
 	CStringList & operator = (CStringList other);
 	CStringList & operator = (CStringList && other);
