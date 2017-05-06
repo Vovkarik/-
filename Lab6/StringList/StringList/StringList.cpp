@@ -39,14 +39,21 @@ CStringList & CStringList::operator=(CStringList other)
 
 CStringList& CStringList::operator=(CStringList && other)
 {
-	m_firstNode = std::move(other.m_firstNode);
-	m_lastNode = other.m_lastNode;
-	m_size = other.m_size;
-	other.m_firstNode = std::make_unique<ListNode>("", nullptr, nullptr);
-	other.m_firstNode->next = std::make_unique<ListNode>("", m_firstNode.get(), nullptr);
-	other.m_lastNode = other.m_firstNode->next.get();
-	other.m_size = 0;
-	return *this;
+	try
+	{
+		m_firstNode = std::move(other.m_firstNode);
+		m_lastNode = other.m_lastNode;
+		m_size = other.m_size;
+		other.m_firstNode = std::make_unique<ListNode>("", nullptr, nullptr);
+		other.m_firstNode->next = std::make_unique<ListNode>("", m_firstNode.get(), nullptr);
+		other.m_lastNode = other.m_firstNode->next.get();
+		other.m_size = 0;
+		return *this;
+	}
+	catch(...)
+	{
+		throw std::bad_alloc();
+	}
 }
 
 CStringList::CStringList(const CStringList & list)
