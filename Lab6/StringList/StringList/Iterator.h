@@ -61,14 +61,14 @@ public:
 		return *this;
 	}
 
-	CIterator& operator++(int)
+	CIterator operator++(int)
 	{
-		auto tmp = *this;
+		CIterator tmp = *this;
 		++*this;
 		return tmp;
 	}
 
-	CIterator& operator--(int)
+	CIterator operator--(int)
 	{
 		CIterator tmp = *this;
 		--*this;
