@@ -22,6 +22,7 @@ CStringList::CStringList(CStringList && other)
 	m_size = other.m_size;
 	other.m_firstNode = std::make_unique<ListNode>("", nullptr, nullptr);
 	other.m_firstNode->next = std::make_unique<ListNode>("", m_firstNode.get(), nullptr);
+	other.m_lastNode = other.m_firstNode->next.get();
 	other.m_size = 0;
 }
 
@@ -43,6 +44,7 @@ CStringList& CStringList::operator=(CStringList && other)
 	m_size = other.m_size;
 	other.m_firstNode = std::make_unique<ListNode>("", nullptr, nullptr);
 	other.m_firstNode->next = std::make_unique<ListNode>("", m_firstNode.get(), nullptr);
+	other.m_lastNode = other.m_firstNode->next.get();
 	other.m_size = 0;
 	return *this;
 }

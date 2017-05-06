@@ -64,28 +64,14 @@ public:
 	CIterator& operator++(int)
 	{
 		auto tmp = *this;
-		if (tmp.m_node != nullptr && tmp.m_node->next != nullptr)
-		{
-			++*this;
-		}
-		else
-		{
-			throw std::out_of_range("Can't get increment of this iterator");
-		}
+		++*this;
 		return tmp;
 	}
 
 	CIterator& operator--(int)
 	{
 		CIterator tmp = *this;
-		if (tmp.m_node != nullptr && tmp.m_node->prev != nullptr)
-		{
-			--*this;
-		}
-		else
-		{
-			throw std::out_of_range("Can't get increment of this iterator");
-		}
+		--*this;
 		return tmp;
 	}
 
