@@ -106,7 +106,7 @@ BOOST_AUTO_TEST_SUITE(StringList_class)
 		VerifyList(myList, expectedVector.bigList);
 	}
 
-	BOOST_AUTO_TEST_CASE(have_iterators_at_the_begin_and_the_end_of_string_list)
+	BOOST_AUTO_TEST_CASE(has_iterators_at_the_begin_and_the_end_of_string_list)
 	{
 		StringListFix expectedVector;
 		CStringList myList;
@@ -122,7 +122,7 @@ BOOST_AUTO_TEST_SUITE(StringList_class)
 		}
 	}
 
-	BOOST_AUTO_TEST_CASE(iterator_have_postfix_form_of_increment)
+	BOOST_AUTO_TEST_CASE(iterator_has_postfix_form_of_increment)
 	{
 		StringListFix expectedVector;
 		CStringList myList;
@@ -138,7 +138,7 @@ BOOST_AUTO_TEST_SUITE(StringList_class)
 		}
 	}
 
-	BOOST_AUTO_TEST_CASE(have_const_iterators_at_the_begin_and_the_end_of_string_list)
+	BOOST_AUTO_TEST_CASE(has_const_iterators_at_the_begin_and_the_end_of_string_list)
 	{
 		StringListFix expectedVector;
 		CStringList myList;
@@ -154,7 +154,7 @@ BOOST_AUTO_TEST_SUITE(StringList_class)
 		}
 	}
 
-	BOOST_AUTO_TEST_CASE(have_reverse_iterators_and_const_revers_iterators_at_the_begin_and_the_end_of_string_list)
+	BOOST_AUTO_TEST_CASE(has_reverse_iterators_and_const_revers_iterators_at_the_begin_and_the_end_of_string_list)
 	{
 		StringListFix expectedVector;
 		CStringList myList;
@@ -170,7 +170,7 @@ BOOST_AUTO_TEST_SUITE(StringList_class)
 		}
 	}
 
-	BOOST_AUTO_TEST_CASE(have_copy_constructor)
+	BOOST_AUTO_TEST_CASE(has_copy_constructor)
 	{
 		StringListFix expectedVector;
 		CStringList myList;
@@ -183,7 +183,7 @@ BOOST_AUTO_TEST_SUITE(StringList_class)
 		VerifyList(copiedList, expectedVector.bigList);
 	}
 
-	BOOST_AUTO_TEST_CASE(have_move_constructor)
+	BOOST_AUTO_TEST_CASE(has_move_constructor)
 	{
 		StringListFix expectedVector;
 		CStringList myList;
@@ -192,11 +192,10 @@ BOOST_AUTO_TEST_SUITE(StringList_class)
 			myList.PushBack(expectedVector.bigList[i]);
 		}
 		CStringList copiedList(std::move(myList));
-		VerifyList(myList, expectedVector.bigList);
 		VerifyList(copiedList, expectedVector.bigList);
 	}
 
-	BOOST_AUTO_TEST_CASE(have_move_operator)
+	BOOST_AUTO_TEST_CASE(has_move_operator)
 	{
 		StringListFix expectedVector;
 		CStringList myList;
@@ -205,11 +204,10 @@ BOOST_AUTO_TEST_SUITE(StringList_class)
 			myList.PushBack(expectedVector.bigList[i]);
 		}
 		CStringList copiedList = std::move(myList);
-		VerifyList(myList, expectedVector.bigList);
 		VerifyList(copiedList, expectedVector.bigList);
 	}
 
-	BOOST_AUTO_TEST_CASE(have_alignment_operator)
+	BOOST_AUTO_TEST_CASE(has_alignment_operator)
 	{
 		StringListFix expectedVector;
 		CStringList myList;

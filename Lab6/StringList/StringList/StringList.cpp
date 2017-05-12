@@ -17,22 +17,36 @@ CStringList::~CStringList()
 
 CStringList::CStringList(CStringList && other)
 {
-	m_firstNode = std::move(other.m_firstNode);
-	m_lastNode = other.m_lastNode;
-	m_size = other.m_size;
-	other.m_firstNode = std::make_unique<ListNode>("", nullptr, nullptr);
-	other.m_firstNode->next = std::make_unique<ListNode>("", m_firstNode.get(), nullptr);
-	other.m_lastNode = other.m_firstNode->next.get();
-	other.m_size = 0;
+	try
+	{
+		m_firstNode = std::make_unique<ListNode>("", nullptr, nullptr);
+		m_firstNode->next = std::make_unique<ListNode>("", m_firstNode.get(), nullptr);
+		m_lastNode = m_firstNode->next.get();
+		std::swap(m_firstNode, other.m_firstNode);
+		std::swap(m_lastNode, other.m_lastNode);
+		std::swap(m_size, other.m_size);
+	}
+	catch (std::bad_alloc())
+	{
+		throw("Memory allocation error");
+	}
 }
 
-CStringList & CStringList::operator=(CStringList other)
+CStringList & CStringList::operator=(CStringList & other)
 {
 	if (m_firstNode != other.m_firstNode)
 	{
-		std::swap(m_firstNode, other.m_firstNode);
-		std::swap(m_lastNode, other.m_lastNode);
-		m_size = other.m_size;
+		CStringList tmp;
+		m_firstNode = std::make_unique<ListNode>("", nullptr, nullptr);
+		m_firstNode->next = std::make_unique<ListNode>("", m_firstNode.get(), nullptr);
+		m_lastNode = m_firstNode->next.get();
+		for (auto data : other)
+		{
+			tmp.PushBack(data);
+		}
+		std::swap(m_firstNode, tmp.m_firstNode);
+		std::swap(m_lastNode, tmp.m_lastNode);
+		std::swap(m_size, tmp.m_size);
 	}
 	return *this;
 }
@@ -41,31 +55,33 @@ CStringList& CStringList::operator=(CStringList && other)
 {
 	try
 	{
-		m_firstNode = std::move(other.m_firstNode);
-		m_lastNode = other.m_lastNode;
-		m_size = other.m_size;
-		other.m_firstNode = std::make_unique<ListNode>("", nullptr, nullptr);
-		other.m_firstNode->next = std::make_unique<ListNode>("", m_firstNode.get(), nullptr);
-		other.m_lastNode = other.m_firstNode->next.get();
-		other.m_size = 0;
+		m_firstNode = std::make_unique<ListNode>("", nullptr, nullptr);
+		m_firstNode->next = std::make_unique<ListNode>("", m_firstNode.get(), nullptr);
+		m_lastNode = m_firstNode->next.get();
+		std::swap(m_firstNode, other.m_firstNode);
+		std::swap(m_lastNode, other.m_lastNode);
+		std::swap(m_size, other.m_size);
 		return *this;
 	}
-	catch(...)
+	catch(std::bad_alloc())
 	{
-		throw std::bad_alloc();
+		throw("Memory allocation error");
 	}
 }
 
 CStringList::CStringList(const CStringList & list)
 {
 	CStringList tmp;
-	for (CIterator<const std::string> it = list.cbegin(); it != list.cend(); ++it)
+	m_firstNode = std::make_unique<ListNode>("", nullptr, nullptr);
+	m_firstNode->next = std::make_unique<ListNode>("", m_firstNode.get(), nullptr);
+	m_lastNode = m_firstNode->next.get();
+	for (auto data : list)
 	{
-		tmp.PushBack(it.m_node->data);
+		tmp.PushBack(data);
 	}
 	std::swap(m_firstNode, tmp.m_firstNode);
 	std::swap(m_lastNode, tmp.m_lastNode);
-	m_size = tmp.m_size;
+	std::swap(m_size, tmp.m_size);
 }
 
 void CStringList::PushBack(const std::string & data)
@@ -90,13 +106,13 @@ bool CStringList::IsEmpty() const
 
 void CStringList::Clear()
 {
-	while(m_lastNode)
+	while (m_firstNode->next->next.get())
 	{
 		m_lastNode->next = nullptr;
 		m_lastNode = m_lastNode->prev;
 	}
-	m_firstNode->next = std::make_unique<ListNode>("", m_firstNode.get(), nullptr);
 	m_lastNode = m_firstNode->next.get();
+	m_lastNode->data = "";
 	m_size = 0;
 }
 
@@ -125,32 +141,32 @@ void CStringList::Insert(const CIterator<std::string> & it, const std::string & 
 
 CIterator<std::string> CStringList::begin()
 {
-	return CIterator<std::string>(m_firstNode->next.get());
+	return m_firstNode->next.get();
 }
 
 CIterator<const std::string> CStringList::begin() const
 {
-	return CIterator<const std::string>(m_firstNode->next.get());
+	return m_firstNode->next.get();
 }
 
 CIterator<std::string> CStringList::end()
 {
-	return CIterator<std::string>(m_lastNode);
+	return m_lastNode;
 }
 
 CIterator<const std::string> CStringList::end() const
 {
-	return CIterator<const std::string>(m_lastNode);
+	return m_lastNode;
 }
 
 CIterator<const std::string> CStringList::cbegin() const
 {
-	return CIterator<const std::string>(m_firstNode->next.get());
+	return m_firstNode->next.get();
 }
 
 CIterator<const std::string> CStringList::cend() const
 {
-	return CIterator<const std::string>(m_lastNode);
+	return m_lastNode;
 }
 
 std::reverse_iterator<CIterator<std::string>> CStringList::rbegin()
