@@ -4,10 +4,7 @@
 
 CStringList::CStringList()
 {
-	m_firstNode = std::make_unique<ListNode>("", nullptr, nullptr);
-	m_firstNode->next = std::make_unique<ListNode>("", m_firstNode.get(), nullptr);
-	m_lastNode = m_firstNode->next.get();
-	m_size = 0;
+	CreateNewList();
 }
 
 CStringList::~CStringList()
@@ -17,71 +14,77 @@ CStringList::~CStringList()
 
 CStringList::CStringList(CStringList && other)
 {
-	try
-	{
-		m_firstNode = std::make_unique<ListNode>("", nullptr, nullptr);
-		m_firstNode->next = std::make_unique<ListNode>("", m_firstNode.get(), nullptr);
-		m_lastNode = m_firstNode->next.get();
-		std::swap(m_firstNode, other.m_firstNode);
-		std::swap(m_lastNode, other.m_lastNode);
-		std::swap(m_size, other.m_size);
-	}
-	catch (std::bad_alloc())
-	{
-		throw("Memory allocation error");
-	}
+	Move(std::move(other));
 }
 
-CStringList & CStringList::operator=(CStringList & other)
+CStringList& CStringList::operator=(CStringList & other)
 {
 	if (m_firstNode != other.m_firstNode)
 	{
-		CStringList tmp;
-		m_firstNode = std::make_unique<ListNode>("", nullptr, nullptr);
-		m_firstNode->next = std::make_unique<ListNode>("", m_firstNode.get(), nullptr);
-		m_lastNode = m_firstNode->next.get();
-		for (auto data : other)
-		{
-			tmp.PushBack(data);
-		}
-		std::swap(m_firstNode, tmp.m_firstNode);
-		std::swap(m_lastNode, tmp.m_lastNode);
-		std::swap(m_size, tmp.m_size);
+		Copy(other);
 	}
 	return *this;
 }
 
 CStringList& CStringList::operator=(CStringList && other)
 {
+	if (m_firstNode != other.m_firstNode)
+	{
+		Move(std::move(other));
+	}
+	return *this;
+}
+
+CStringList::CStringList(const CStringList & other)
+{
+	Copy(other);
+}
+
+void CStringList::CreateNewList()
+{
 	try
 	{
 		m_firstNode = std::make_unique<ListNode>("", nullptr, nullptr);
 		m_firstNode->next = std::make_unique<ListNode>("", m_firstNode.get(), nullptr);
 		m_lastNode = m_firstNode->next.get();
-		std::swap(m_firstNode, other.m_firstNode);
-		std::swap(m_lastNode, other.m_lastNode);
-		std::swap(m_size, other.m_size);
-		return *this;
+		m_size = 0;
 	}
-	catch(std::bad_alloc())
+	catch (std::bad_alloc const &)
 	{
-		throw("Memory allocation error");
+		throw;
 	}
 }
 
-CStringList::CStringList(const CStringList & list)
+void CStringList::Move(CStringList && other)
+{
+	try
+	{
+		if (m_firstNode == nullptr)
+		{
+			CreateNewList();
+		}
+		else
+		{
+			Clear();
+		}
+		std::swap(m_firstNode, other.m_firstNode);
+		std::swap(m_lastNode, other.m_lastNode);
+		std::swap(m_size, other.m_size);
+	}
+	catch (std::bad_alloc const &)
+	{
+		m_firstNode = nullptr;
+	}
+}
+
+void  CStringList::Copy(CStringList const & other)
 {
 	CStringList tmp;
-	m_firstNode = std::make_unique<ListNode>("", nullptr, nullptr);
-	m_firstNode->next = std::make_unique<ListNode>("", m_firstNode.get(), nullptr);
-	m_lastNode = m_firstNode->next.get();
-	for (auto data : list)
+	for (auto const & data : other)
 	{
 		tmp.PushBack(data);
 	}
-	std::swap(m_firstNode, tmp.m_firstNode);
-	std::swap(m_lastNode, tmp.m_lastNode);
-	std::swap(m_size, tmp.m_size);
+	Move(std::move(tmp));
 }
 
 void CStringList::PushBack(const std::string & data)
@@ -106,6 +109,10 @@ bool CStringList::IsEmpty() const
 
 void CStringList::Clear()
 {
+	if (m_size == 0)
+	{
+		return;
+	}
 	while (m_firstNode->next->next.get())
 	{
 		m_lastNode->next = nullptr;

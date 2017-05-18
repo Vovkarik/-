@@ -5,7 +5,7 @@
 void PrintInfo(CHttpUrl const& url)
 {
 
-	std::cout << "Protocol " << url.ProtocolToString() << "\n"
+	std::cout << "Protocol " << url.ProtocolToString(url.GetProtocol()) << "\n"
 		<< "Domain " << url.GetDomain() << "\n"
 		<< "Port " << url.GetPort() << "\n"
 		<< "Document " << url.GetDocument() << std::endl;

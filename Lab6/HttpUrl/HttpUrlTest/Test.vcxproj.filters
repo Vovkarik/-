@@ -44,7 +44,7 @@
     <ClCompile Include="..\Lab06\UrlParsingError.cpp">
       <Filter>Файлы исходного кода</Filter>
     </ClCompile>
-    <ClCompile Include="Tests.cpp">
+    <ClCompile Include="CHttpUrlTests.cpp">
       <Filter>Файлы исходного кода</Filter>
     </ClCompile>
   </ItemGroup>

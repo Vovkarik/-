@@ -9,7 +9,7 @@ BOOST_AUTO_TEST_SUITE(CHttpURL)
 		BOOST_AUTO_TEST_CASE(can_assign_url_by_string_method)
 		{
 			CHttpUrl googleUrl("http://www.google.com/index.html");
-			BOOST_CHECK_EQUAL(googleUrl.GetDocument(), "/index.html");
+			BOOST_CHECK_EQUAL(googleUrl.GetDocument(), "index.html");
 			BOOST_CHECK_EQUAL(googleUrl.GetProtocol(), HTTP);
 			BOOST_CHECK_EQUAL(googleUrl.GetDomain(), "www.google.com");
 			BOOST_CHECK_EQUAL(googleUrl.GetPort(), 80);
@@ -17,7 +17,7 @@ BOOST_AUTO_TEST_SUITE(CHttpURL)
 		
 		BOOST_AUTO_TEST_CASE(if_scheme_incorrect_then_class_throw_exception)
 		{
-			BOOST_REQUIRE_THROW(CHttpUrl url("htts://domain.com/document"), std::invalid_argument);
+			BOOST_REQUIRE_THROW(CHttpUrl url("htts://domain.com/document"), CUrlParsingError);
 		}
 		
 		BOOST_AUTO_TEST_CASE(if_scheme_delimether_is_incorrect_then_class_throw_parsing_error_exception)
@@ -27,17 +27,17 @@ BOOST_AUTO_TEST_SUITE(CHttpURL)
 		
 		BOOST_AUTO_TEST_CASE(if_domain_is_empty_then_class_throw_invalid_args_exception)
 		{
-			BOOST_REQUIRE_THROW(CHttpUrl url("https:///domain"), std::invalid_argument);
+			BOOST_REQUIRE_THROW(CHttpUrl url("https:///domain"), CUrlParsingError);
 		}
 		
 		BOOST_AUTO_TEST_CASE(if_domain_is_equal_space_then_class_throw_invalid_args_exception)
 		{
-			BOOST_REQUIRE_THROW(CHttpUrl url("https://     /document"), std::invalid_argument);
+			BOOST_REQUIRE_THROW(CHttpUrl url("https://     /document"), CUrlParsingError);
 		}
 		
 		BOOST_AUTO_TEST_CASE(if_domain_contain_space_then_class_throw_invalid_args_exception)
 		{
-			BOOST_REQUIRE_THROW(CHttpUrl url("https://domain .com/document"), std::invalid_argument);
+			BOOST_REQUIRE_THROW(CHttpUrl url("https://domain .com/document"), CUrlParsingError);
 		}
 		
 		BOOST_AUTO_TEST_CASE(if_document_is_empty_class_do_not_throw_exception)
@@ -46,19 +46,19 @@ BOOST_AUTO_TEST_SUITE(CHttpURL)
 			BOOST_REQUIRE_NO_THROW(CHttpUrl url("https://google.com"));
 		}
 		
-		BOOST_AUTO_TEST_CASE(if_document_is_empty_then_get_doc_returns_empty_doc_with_slash_ch)
+		BOOST_AUTO_TEST_CASE(if_document_is_empty_then_get_doc_returns_empty_doc)
 		{
 			CHttpUrl url1("https://google.com/");
-			BOOST_CHECK_EQUAL(url1.GetDocument(), "/");
+			BOOST_CHECK_EQUAL(url1.GetDocument(), "");
 		
 			CHttpUrl url2("https://google.com");
-			BOOST_CHECK_EQUAL(url2.GetDocument(), "/");
+			BOOST_CHECK_EQUAL(url2.GetDocument(), "");
 		}
 		
 		BOOST_AUTO_TEST_CASE(if_url_contains_non_empty_document_get_doc_returns_him)
 		{
 			CHttpUrl url("http://google.com/search/document.txt");
-			BOOST_CHECK_EQUAL(url.GetDocument(), "/search/document.txt");
+			BOOST_CHECK_EQUAL(url.GetDocument(), "search/document.txt");
 		}
 		
 		BOOST_AUTO_TEST_CASE(if_url_contains_port_then_port_will_be_different_from_standart)
@@ -81,27 +81,12 @@ BOOST_AUTO_TEST_SUITE(CHttpURL)
 		
 	BOOST_AUTO_TEST_SUITE_END()
 	
-		BOOST_AUTO_TEST_SUITE(when_initialized_with_url_components)
+	BOOST_AUTO_TEST_SUITE(when_initialized_with_url_components)
 		
-		BOOST_AUTO_TEST_CASE(can_not_pass_an_invalid_domain_name)
-		{
-			BOOST_REQUIRE_THROW(CHttpUrl("", "document"), std::invalid_argument);
-		}
-		
-		BOOST_AUTO_TEST_CASE(can_not_pass_an_invalid_document)
-		{
-			BOOST_REQUIRE_THROW(CHttpUrl("domain.com", "	"), std::invalid_argument);
-		}
-		
-		BOOST_AUTO_TEST_CASE(can_not_pass_an_domain_name_with_scheme_or_slash)
-		{
-			BOOST_REQUIRE_THROW(CHttpUrl("https://domain.domain.com", "document"), std::invalid_argument);
-		}
-		
-		BOOST_AUTO_TEST_CASE(if_document_does_not_begin_with_slash_it_will_be_added)
+		BOOST_AUTO_TEST_CASE(can_parse_document_right)
 		{
 			CHttpUrl url1("domain.com", "");
-			BOOST_CHECK_EQUAL(url1.GetDocument(), "/");
+			BOOST_CHECK_EQUAL(url1.GetDocument(), "");
 		
 			CHttpUrl url2("domain.com", "document/something.txt");
 			BOOST_CHECK_EQUAL(url2.GetDocument(), "document/something.txt");
@@ -158,9 +143,9 @@ BOOST_AUTO_TEST_SUITE(CHttpURL)
 			BOOST_CHECK_EQUAL(url.GetDomain(), "domain.com");
 		}
 		
-		BOOST_AUTO_TEST_CASE(can_get_the_document_with_slash_in_begin)
+		BOOST_AUTO_TEST_CASE(can_get_the_document)
 		{
-			BOOST_CHECK_EQUAL(url.GetDocument(), "/document/something.txt");
+			BOOST_CHECK_EQUAL(url.GetDocument(), "document/something.txt");
 		}
 		
 		BOOST_AUTO_TEST_CASE(can_get_the_url)
@@ -171,4 +156,3 @@ BOOST_AUTO_TEST_SUITE(CHttpURL)
 	BOOST_AUTO_TEST_SUITE_END()
 
 BOOST_AUTO_TEST_SUITE_END()
-
