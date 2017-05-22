@@ -2,7 +2,7 @@
 #include "../Lab06/HttpUrl.h"
 #include "../Lab06/UrlParsingError.h"
 
-BOOST_AUTO_TEST_SUITE(CHttpURL)
+BOOST_AUTO_TEST_SUITE(CHttpURL_class)
 
 	BOOST_AUTO_TEST_SUITE(when_initialized_with_url_string)
 	
@@ -15,12 +15,17 @@ BOOST_AUTO_TEST_SUITE(CHttpURL)
 			BOOST_CHECK_EQUAL(googleUrl.GetPort(), 80);
 		}
 		
-		BOOST_AUTO_TEST_CASE(if_scheme_incorrect_then_class_throw_exception)
+		BOOST_AUTO_TEST_CASE(if_protocol_incorrect_then_class_throw_exception)
 		{
 			BOOST_REQUIRE_THROW(CHttpUrl url("htts://domain.com/document"), CUrlParsingError);
 		}
+
+		BOOST_AUTO_TEST_CASE(if_string_is_empty_throws_exeption)
+		{
+			BOOST_REQUIRE_THROW(CHttpUrl url(""), CUrlParsingError);
+		}
 		
-		BOOST_AUTO_TEST_CASE(if_scheme_delimether_is_incorrect_then_class_throw_parsing_error_exception)
+		BOOST_AUTO_TEST_CASE(if_protocol_delimether_is_incorrect_then_class_throw_parsing_error_exception)
 		{
 			BOOST_REQUIRE_THROW(CHttpUrl url("htts:/domain.com/document"), CUrlParsingError);
 		}
@@ -118,7 +123,7 @@ BOOST_AUTO_TEST_SUITE(CHttpURL)
 	struct initialize_url_
 	{
 		initialize_url_()
-			: urlStr("https://domain.com/document/something.txt")
+			: urlStr("https://domain.com:70/document/something.txt")
 			, url(urlStr)
 		{};
 	
@@ -135,7 +140,7 @@ BOOST_AUTO_TEST_SUITE(CHttpURL)
 		
 		BOOST_AUTO_TEST_CASE(as_our_protocol_has_equal_that_https_then_port_is_equal_443)
 		{
-			BOOST_CHECK_EQUAL(url.GetPort(), 443u);
+			BOOST_CHECK_EQUAL(url.GetPort(), 70u);
 		}
 		
 		BOOST_AUTO_TEST_CASE(can_get_the_domain_name)
