@@ -11,7 +11,7 @@ public:
 	~CStringList();
 	CStringList(CStringList && rhs);
 
-	CStringList & operator = (CStringList & other);
+	CStringList & operator = (CStringList const & other);
 	CStringList & operator = (CStringList && other);
 
 	void CreateNewList();

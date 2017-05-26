@@ -4,44 +4,6 @@
 
 CStringList::CStringList()
 {
-	CreateNewList();
-}
-
-CStringList::~CStringList()
-{
-	Clear();
-}
-
-CStringList::CStringList(CStringList && other)
-{
-	Move(std::move(other));
-}
-
-CStringList& CStringList::operator=(CStringList & other)
-{
-	if (m_firstNode != other.m_firstNode)
-	{
-		Copy(other);
-	}
-	return *this;
-}
-
-CStringList& CStringList::operator=(CStringList && other)
-{
-	if (m_firstNode != other.m_firstNode)
-	{
-		Move(std::move(other));
-	}
-	return *this;
-}
-
-CStringList::CStringList(const CStringList & other)
-{
-	Copy(other);
-}
-
-void CStringList::CreateNewList()
-{
 	try
 	{
 		m_firstNode = std::make_unique<ListNode>("", nullptr, nullptr);
@@ -49,42 +11,61 @@ void CStringList::CreateNewList()
 		m_lastNode = m_firstNode->next.get();
 		m_size = 0;
 	}
-	catch (std::bad_alloc const &)
-	{
-		throw;
-	}
-}
-
-void CStringList::Move(CStringList && other)
-{
-	try
-	{
-		if (m_firstNode == nullptr)
-		{
-			CreateNewList();
-		}
-		else
-		{
-			Clear();
-		}
-		std::swap(m_firstNode, other.m_firstNode);
-		std::swap(m_lastNode, other.m_lastNode);
-		std::swap(m_size, other.m_size);
-	}
-	catch (std::bad_alloc const &)
+	catch (std::bad_alloc const & error)
 	{
 		m_firstNode = nullptr;
+		throw(error.what());
 	}
 }
 
-void  CStringList::Copy(CStringList const & other)
+CStringList::~CStringList()
 {
+	Clear();
+}
+
+CStringList::CStringList(const CStringList & other)
+{
+	CStringList();
 	CStringList tmp;
 	for (auto const & data : other)
 	{
 		tmp.PushBack(data);
 	}
-	Move(std::move(tmp));
+	std::swap(m_firstNode, tmp.m_firstNode);
+	std::swap(m_lastNode, tmp.m_lastNode);
+	std::swap(m_size, tmp.m_size);
+}
+
+CStringList::CStringList(CStringList && other)
+{
+	CStringList();
+	std::swap(m_firstNode, other.m_firstNode);
+	std::swap(m_lastNode, other.m_lastNode);
+	std::swap(m_size, other.m_size);
+}
+
+CStringList& CStringList::operator=(CStringList const & other)
+{
+	if (this != std::addressof(other))
+	{
+		CStringList tmp(other);
+		std::swap(m_firstNode, tmp.m_firstNode);
+		std::swap(m_lastNode, tmp.m_lastNode);
+		std::swap(m_size, tmp.m_size);
+	}
+	return *this;
+}
+
+CStringList& CStringList::operator=(CStringList && other)
+{
+	if (this != std::addressof(other))
+	{
+		CStringList tmp(std::move(other));
+		std::swap(m_firstNode, tmp.m_firstNode);
+		std::swap(m_lastNode, tmp.m_lastNode);
+		std::swap(m_size, tmp.m_size);
+	}
+	return *this;
 }
 
 void CStringList::PushBack(const std::string & data)
