@@ -214,7 +214,8 @@ BOOST_AUTO_TEST_SUITE(CStringList_class)
 		{
 			myList.PushBack(expectedVector.bigList[i]);
 		}
-		CStringList copiedList = std::move(myList);
+		CStringList copiedList;
+		copiedList = std::move(myList);
 		VerifyList(copiedList, expectedVector.bigList);
 	}
 
@@ -226,7 +227,8 @@ BOOST_AUTO_TEST_SUITE(CStringList_class)
 		{
 			myList.PushBack(expectedVector.bigList[i]);
 		}
-		CStringList copiedList = myList;
+		CStringList copiedList;
+		copiedList = myList;
 		VerifyList(myList, expectedVector.bigList);
 		VerifyList(copiedList, expectedVector.bigList);
 	}
