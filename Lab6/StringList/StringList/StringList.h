@@ -14,9 +14,6 @@ public:
 	CStringList & operator = (CStringList const & other);
 	CStringList & operator = (CStringList && other);
 
-	void CreateNewList();
-	void Move(CStringList && other);
-	void Copy(CStringList const & other);
 	void PushBack(const std::string & data);
 	void PushFront(const std::string & data);
 	size_t GetSize() const;
