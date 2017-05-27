@@ -103,9 +103,8 @@ void CHttpUrl::ParseUrl(std::string const& url)
 
 void CHttpUrl::ParseProtocol(std::string const& url, size_t & pos)
 {
-	std::string protocol;
 	size_t delimiterPos = url.find(':', pos);
-	protocol.append(url, pos, delimiterPos - pos);
+	std::string protocol(url, pos, delimiterPos - pos);
 	m_protocol = StringToProtocol(protocol);
 	pos += protocol.length();
 	if (url.compare(pos, 3, "://") != 0)
@@ -126,7 +125,7 @@ void CHttpUrl::ParseDomain(std::string const& url, size_t & pos)
 	{
 		throw CUrlParsingError("Domain contains unapropriate symbols");
 	}
-	m_domain.append(url, pos, delimiterPos - pos);
+	m_domain.assign(url, pos, delimiterPos - pos);
 	pos += m_domain.length();
 	if (m_domain.empty())
 	{
@@ -136,37 +135,39 @@ void CHttpUrl::ParseDomain(std::string const& url, size_t & pos)
 
 void CHttpUrl::ParsePort(std::string const& url, size_t & pos)
 {
-	if (url[pos] != ':')
+	if (pos < url.length())
 	{
-		m_port = GetDefaultPort(m_protocol);
-		return;
+		if (url[pos] != ':')
+		{
+			m_port = GetDefaultPort(m_protocol);
+			return;
+		}
+		pos++;
+		if (url[pos] == '-')
+		{
+			throw CUrlParsingError("Port can't be negative");
+		}
+		size_t delimiterPos = url.find('/', pos);
+		std::string port(url, pos, delimiterPos - pos);
+		if (port.empty())
+		{
+			throw CUrlParsingError("Port is empty");
+		}
+		try
+		{
+			boost::lexical_cast<unsigned short>(port);
+		}
+		catch (boost::bad_lexical_cast &)
+		{
+			throw CUrlParsingError("Invalid port");
+		}
+		pos += port.length();
 	}
-	pos++;
-	if (url[pos] == '-')
-	{
-		throw CUrlParsingError("Port can't be negative");
-	}
-	size_t delimiterPos = url.find('/', pos);
-	std::string port;
-	port.append(url, pos, delimiterPos - pos);
-	if (port.empty())
-	{
-		throw CUrlParsingError("Port is empty");
-	}
-	try
-	{
-		boost::lexical_cast<unsigned short>(port);
-	}
-	catch (boost::bad_lexical_cast &)
-	{
-		throw CUrlParsingError("Invalid port");
-	}
-	m_port = atoi(port.c_str());
-	pos += port.length();
 }
 
 void CHttpUrl::ParseDocument(std::string const& url, size_t & pos)
 {
+	if (pos < url.length())
 	if (url[pos] == '/')
 	{
 		pos++;
@@ -175,7 +176,7 @@ void CHttpUrl::ParseDocument(std::string const& url, size_t & pos)
 	{
 		throw CUrlParsingError("Document contains spaces");
 	}
-	m_document.append(url, pos);
+	m_document.assign(url, pos);
 }
 
 unsigned short CHttpUrl::GetDefaultPort(Protocol const& protocol)
