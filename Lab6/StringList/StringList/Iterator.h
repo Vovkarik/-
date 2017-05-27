@@ -23,7 +23,7 @@ public:
 		return !(m_node == other.m_node);
 	}
 
-	typename CIterator::reference operator*() const
+	typename reference operator*() const
 	{
 		if (m_node != nullptr && m_node->next != nullptr && m_node->prev != nullptr)
 		{
@@ -75,9 +75,9 @@ public:
 		return tmp;
 	}
 
-	std::string operator->()const
+	pointer operator->()const
 	{
-		return m_node->data;
+		return std::pointer_traits<pointer>::pointer_to(**this);
 	}
 private:
 	ListNode* m_node = nullptr;

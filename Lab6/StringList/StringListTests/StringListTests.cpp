@@ -13,7 +13,18 @@ void VerifyList(CStringList & list, const std::vector<std::string> & expectedEle
 	}
 }
 
-BOOST_AUTO_TEST_SUITE(StringList_class)
+BOOST_AUTO_TEST_SUITE(CIterator_class)
+
+	BOOST_AUTO_TEST_CASE(has_arrow_operator_and_returns_const_string_pointer)
+	{
+		CStringList lst;
+		lst.PushBack("hello");
+		BOOST_CHECK_EQUAL(lst.begin()->size(), 5);
+	}
+
+BOOST_AUTO_TEST_SUITE_END()
+
+BOOST_AUTO_TEST_SUITE(CStringList_class)
 
 	struct StringListFix
 	{
