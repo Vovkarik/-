@@ -9,10 +9,11 @@
 
 #include <stdio.h>
 #include <tchar.h>
-#include <iostream>
-#include <cstdio>
-#include <cstdlib>
+#include <memory>
 #include <iterator>
+#include <cassert>
+#include <vector>
+#include <map>
 
 
 // TODO: Установите здесь ссылки на дополнительные заголовки, требующиеся для программы
