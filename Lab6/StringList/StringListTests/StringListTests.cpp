@@ -179,6 +179,13 @@ BOOST_AUTO_TEST_SUITE(CStringList_class)
 			BOOST_CHECK_EQUAL(*it, expectedVector.bigList[counter]);
 			counter--;
 		}
+		counter = expectedVector.bigList.size() - 1;
+		for (auto it = myList.rbegin(); it != myList.rend(); ++it)
+		{
+			BOOST_CHECK_EQUAL(*it, expectedVector.bigList[counter]);
+			counter--;
+		}
+
 	}
 
 	BOOST_AUTO_TEST_CASE(has_copy_constructor)

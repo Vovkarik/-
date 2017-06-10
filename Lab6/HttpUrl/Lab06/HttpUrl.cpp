@@ -135,34 +135,33 @@ void CHttpUrl::ParseDomain(std::string const& url, size_t & pos)
 
 void CHttpUrl::ParsePort(std::string const& url, size_t & pos)
 {
-	if (pos < url.length())
+	if (url[pos] != ':')
 	{
-		if (url[pos] != ':')
-		{
-			m_port = GetDefaultPort(m_protocol);
-			return;
-		}
-		pos++;
-		if (url[pos] == '-')
-		{
-			throw CUrlParsingError("Port can't be negative");
-		}
-		size_t delimiterPos = url.find('/', pos);
-		std::string port(url, pos, delimiterPos - pos);
-		if (port.empty())
-		{
-			throw CUrlParsingError("Port is empty");
-		}
-		try
-		{
-			boost::lexical_cast<unsigned short>(port);
-		}
-		catch (boost::bad_lexical_cast &)
-		{
-			throw CUrlParsingError("Invalid port");
-		}
-		pos += port.length();
+		m_port = GetDefaultPort(m_protocol);
+		return;
 	}
+	pos++;
+	if (url[pos] == '-')
+	{
+		throw CUrlParsingError("Port can't be negative");
+	}
+	size_t delimiterPos = url.find('/', pos);
+	std::string port;
+	port.append(url, pos, delimiterPos - pos);
+	if (port.empty())
+	{
+		throw CUrlParsingError("Port is empty");
+	}
+	try
+	{
+		boost::lexical_cast<unsigned short>(port);
+	}
+	catch (boost::bad_lexical_cast &)
+	{
+		throw CUrlParsingError("Invalid port");
+	}
+	m_port = atoi(port.c_str());
+	pos += port.length();
 }
 
 void CHttpUrl::ParseDocument(std::string const& url, size_t & pos)
