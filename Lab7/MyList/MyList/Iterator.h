@@ -1,24 +1,25 @@
 #pragma once
-#include "stdafx.h" 
 #include "ListNode.h"
 
 template <typename ValueType>
 class CIterator : public std::iterator<std::bidirectional_iterator_tag, ValueType>
 {
 public:
+	using NodeType = ListNode<std::decay_t<ValueType>>;
+
 	CIterator() = default;
 
-	CIterator(ListNode * node)
+	CIterator(NodeType * node)
 		: m_node(node)
 	{
 	}
 
-	bool operator==(CIterator const& other) const
+	bool operator==(CIterator<ValueType> const& other) const
 	{
 		return m_node == other.m_node;
 	}
 
-	bool operator!=(CIterator const& other) const
+	bool operator!=(CIterator<ValueType> const& other) const
 	{
 		return !(m_node == other.m_node);
 	}
@@ -35,7 +36,7 @@ public:
 		}
 	}
 
-	CIterator& operator++()
+	CIterator<ValueType>& operator++()
 	{
 		if (m_node != nullptr && m_node->next != nullptr)
 		{
@@ -48,7 +49,7 @@ public:
 		return *this;
 	}
 
-	CIterator& operator--()
+	CIterator<ValueType>& operator--()
 	{
 		if (m_node != nullptr && m_node->prev != nullptr)
 		{
@@ -61,16 +62,16 @@ public:
 		return *this;
 	}
 
-	CIterator operator++(int)
+	CIterator<ValueType> operator++(int)
 	{
-		CIterator tmp = *this;
+		CIterator<ValueType> tmp = *this;
 		++*this;
 		return tmp;
 	}
 
-	CIterator operator--(int)
+	CIterator<ValueType> operator--(int)
 	{
-		CIterator tmp = *this;
+		CIterator<ValueType> tmp = *this;
 		--*this;
 		return tmp;
 	}
@@ -80,6 +81,7 @@ public:
 		return std::pointer_traits<pointer>::pointer_to(**this);
 	}
 private:
-	ListNode* m_node = nullptr;
+	NodeType* m_node = nullptr;
+	template <class T>
 	friend class CMyList;
 };

@@ -5,7 +5,7 @@ template <typename T>
 class ListNode
 {
 public:
-	ListNode(const T data, ListNode *prev, std::unique_ptr<ListNode> && next)
+	ListNode(const T& data, ListNode<T> *prev, std::unique_ptr<ListNode<T>> && next)
 		: data(data)
 		, prev(prev)
 		, next(std::move(next))
@@ -13,7 +13,7 @@ public:
 	}
 
 	T data;
-	ListNode *prev;
-	std::unique_ptr<ListNode> next;
+	ListNode<T> *prev;
+	std::unique_ptr<ListNode<T>> next;
 };
 
