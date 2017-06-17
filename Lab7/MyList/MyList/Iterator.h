@@ -81,7 +81,7 @@ public:
 		return std::pointer_traits<pointer>::pointer_to(**this);
 	}
 private:
-	NodeType* m_node = nullptr;
+	NodeType * m_node = nullptr;
 	template <class T>
 	friend class CMyList;
 };

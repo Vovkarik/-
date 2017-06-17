@@ -15,6 +15,6 @@
 #include <cassert>
 #include <vector>
 #include <map>
-
+#include <boost/optional.hpp>
 
 // TODO: Установите здесь ссылки на дополнительные заголовки, требующиеся для программы

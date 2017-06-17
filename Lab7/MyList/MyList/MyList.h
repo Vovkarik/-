@@ -1,4 +1,5 @@
 #pragma once
+#include "stdafx.h"
 #include "Iterator.h"
 #include "ListNode.h"
 
@@ -45,8 +46,8 @@ private:
 template <typename T>
 CMyList<T>::CMyList()
 {
-	m_firstNode = std::make_unique<ListNode<T>>(T(), nullptr, nullptr);
-	m_firstNode->next = std::make_unique<ListNode<T>>(T(), m_firstNode.get(), nullptr);
+	m_firstNode = std::make_unique<ListNode<T>>(boost::none, nullptr, nullptr);
+	m_firstNode->next = std::make_unique<ListNode<T>>(boost::none, m_firstNode.get(), nullptr);
 	m_lastNode = m_firstNode->next.get();
 	m_size = 0;
 }
@@ -139,7 +140,7 @@ void CMyList<T>::Clear()
 		m_lastNode = m_lastNode->prev;
 	}
 	m_lastNode = m_firstNode->next.get();
-	m_lastNode->data = T();
+	m_lastNode->data.reset();
 	m_size = 0;
 }
 

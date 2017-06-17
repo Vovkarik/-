@@ -1,18 +1,16 @@
 #pragma once
-#include "stdafx.h"
-
 template <typename T>
 class ListNode
 {
 public:
-	ListNode(const T& data, ListNode<T> *prev, std::unique_ptr<ListNode<T>> && next)
+	ListNode(const boost::optional<T>& data, ListNode<T> *prev, std::unique_ptr<ListNode<T>> && next)
 		: data(data)
 		, prev(prev)
 		, next(std::move(next))
 	{
 	}
 
-	T data;
+	boost::optional<T> data;
 	ListNode<T> *prev;
 	std::unique_ptr<ListNode<T>> next;
 };
