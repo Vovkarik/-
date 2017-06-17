@@ -2,17 +2,16 @@
 #include <iostream>
 #include "../MyList/MyList.h"
 
-/*
+
 struct S
 {
-  bool throwOnCopy = false
-  S() = default;
-  S(S const & x)
-{
-  if(throwOnCopy)
-  throw;
-}
-}*/
+	bool throwOnCopy = false;
+	S() = default;
+	S(S const & x)
+	{
+		if (throwOnCopy) throw;
+	}
+};
 
 template <typename T>
 void VerifyList(CMyList<T> & list, const std::vector<T> & expectedElements)
