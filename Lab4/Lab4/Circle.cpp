@@ -4,7 +4,7 @@
 #include "Point.h"
 
 CCircle::CCircle(Point const& center, double radius, std::string const& outlineColor, std::string const& fillColor)
-	: ISolidShape("Circle")
+	: ISolidShape()
 	, m_center(center)
 	, m_radius(radius)
 	, m_outlineColor(outlineColor)

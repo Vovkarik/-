@@ -13,6 +13,7 @@ public:
 	Point GetVertex2() const;
 	Point GetVertex3() const;
 	std::string ToString() const;
+	double GetSideLength(Point p1, Point p2) const;
 private:
 	std::string m_outlineColor, m_fillColor;
 	Point m_vertex1, m_vertex2, m_vertex3;

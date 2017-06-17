@@ -1,5 +1,5 @@
-#include "LineSegment.h"
 #include "stdafx.h"
+#include "LineSegment.h"
 
 CLineSegment::CLineSegment(Point const& startPoint, Point const& endPoint, std::string const& outlineColor)
 	: m_startPoint(startPoint)
