@@ -1,6 +1,5 @@
 #include "stdafx.h"
 #include "Circle.h"
-#include "ISolidShape.h"
 #include "Point.h"
 
 CCircle::CCircle(Point const& center, double radius, std::string const& outlineColor, std::string const& fillColor)

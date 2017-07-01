@@ -26,8 +26,6 @@ std::string CLineSegment::GetOutlineColor() const
 std::string CLineSegment::ToString() const
 {
 	return (std::string("Type: Line") + "\n"
-		+ "Area: " + std::to_string(GetArea()) + "\n"
-		+ "Perimeter: " + std::to_string(GetPerimeter()) + "\n"
 		+ "Outline color: " + GetOutlineColor() + "\n"
 		+ "Start point: " + GetStartPoint().ToString() + "\n"
 		+ "End point: " + GetEndPoint().ToString() + "\n");

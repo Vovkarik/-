@@ -20,6 +20,36 @@ CController::CController(std::istream & input, std::ostream & output)
 {
 }
 
+size_t FindPosOfShapeWithMinPerimiter(std::vector<IShape> shapes)
+{
+    size_t minPerimiterPosition;
+    double minPerimiter;
+    for (size_t i = 0; i < shapes.size(); ++i)
+    {
+        if (shapes[i].GetPerimeter() < minPerimiter)
+        {
+            minPerimiter = shapes[i].GetPerimeter();
+            minPerimiterPosition = i;
+        }
+    }
+    return minPerimiterPosition;
+}
+
+size_t FindPosOfShapeWithMaxArea(std::vector<IShape> shapes)
+{
+    size_t maxAreaPosition;
+    double maxArea;
+    for (size_t i = 0; i < shapes.size(); ++i)
+    {
+        if (shapes[i].GetArea() > maxArea)
+        {
+            maxArea = shapes[i].GetArea();
+            maxAreaPosition = i;
+        }
+    }
+    return maxAreaPosition;
+}
+
 void CController::PrintInfo() const
 {
 	if (!m_shapes.empty())
@@ -58,33 +88,5 @@ bool CController::CreateTriangle(std::istream & in)
 	return false;
 }
 
-size_t FindPosOfShapeWithMinPerimiter(std::vector<IShape> shapes)
-{
-	size_t minPerimiterPosition;
-	double minPerimiter;
-	for (size_t i = 0; i < shapes.size(); ++i)
-	{
-		if (shapes[i].GetPerimeter() < minPerimiter)
-		{
-			minPerimiter = shapes[i].GetPerimeter();
-			minPerimiterPosition = i;
-		}
-	}
-	return minPerimiterPosition;
-}
 
-size_t FindPosOfShapeWithMaxArea(std::vector<IShape> shapes)
-{
-	size_t maxAreaPosition;
-	double maxArea;
-	for (size_t i = 0; i < shapes.size(); ++i)
-	{
-		if (shapes[i].GetArea() > maxArea)
-		{
-			maxArea = shapes[i].GetArea();
-			maxAreaPosition = i;
-		}
-	}
-	return maxAreaPosition;
-}
 
