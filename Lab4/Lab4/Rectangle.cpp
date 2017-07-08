@@ -66,3 +66,13 @@ std::string CRectangle::ToString() const
 		+ "Width: " + std::to_string(GetWidth()) + "\n"
 		+ "Height: " + std::to_string(GetHeight()) + "\n");
 }
+
+std::istream & operator >> (std::istream & input, CRectangle & rectangle)
+{
+	Point leftTop;
+	double height, width;
+	std::string outlineColor, fillColor;
+	input >> leftTop >> width >> height >> outlineColor >> fillColor;
+	rectangle = CRectangle(leftTop, width, height, outlineColor, fillColor);
+	return input;
+}

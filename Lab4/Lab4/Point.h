@@ -10,3 +10,5 @@ public:
 	double y = 0.0;
 };
 
+std::istream & operator >> (std::istream & input, Point & point);
+

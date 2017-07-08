@@ -1,8 +1,11 @@
 #pragma once
 #include "ISolidShape.h"
+#include "Point.h"
+
 class CRectangle : public ISolidShape
 {
 public:
+	CRectangle() = default;
 	CRectangle(Point const& leftTop, double width, double height, std::string const& outlineColor, std::string const& fillColor);
 	~CRectangle() = default;
 	double GetArea() const;
@@ -19,4 +22,6 @@ private:
 	double m_width, m_height;
 	std::string m_outlineColor, m_fillColor;
 };
+
+std::istream & operator >> (std::istream & input, CRectangle & rectangle);
 

@@ -63,3 +63,12 @@ std::string CTriangle::ToString() const
 		+ "Vertex 2: " + GetVertex2().ToString() + "\n"
 		+ "Vertex 3: " + GetVertex3().ToString() + "\n");
 }
+
+std::istream & operator >> (std::istream & input, CTriangle & triangle)
+{
+	Point vertex1, vertex2, vertex3;
+	std::string outlineColor, fillColor;
+	input >> vertex1 >> vertex2 >> vertex3 >> outlineColor >> fillColor;
+	triangle = CTriangle(vertex1, vertex2, vertex3, outlineColor, fillColor);
+	return input;
+}

@@ -51,3 +51,13 @@ std::string CCircle::ToString() const
 		+ "Center: " + GetCenter().ToString() + "\n"
 		+ "Radius: " + std::to_string(GetRadius()) + "\n");
 }
+
+std::istream & operator >> (std::istream & input, CCircle & circle)
+{
+	Point center;
+	double radius;
+	std::string outlineColor, fillColor;
+	input >> center >> radius >> outlineColor >> fillColor;
+	circle = CCircle(center, radius, outlineColor, fillColor);
+	return input;
+}

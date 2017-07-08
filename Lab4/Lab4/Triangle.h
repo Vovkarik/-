@@ -1,8 +1,11 @@
 #pragma once
 #include "ISolidShape.h"
+#include "Point.h"
+
 class CTriangle : public ISolidShape
 {
 public:
+	CTriangle() = default;
 	CTriangle(Point const& vertex1, Point const& vertex2, Point const& vertex3, std::string const& outlineColor, std::string const& fillColor);
 	~CTriangle() = default;
 	double GetArea() const;
@@ -19,3 +22,4 @@ private:
 	Point m_vertex1, m_vertex2, m_vertex3;
 };
 
+std::istream & operator >> (std::istream & input, CTriangle & triangle);

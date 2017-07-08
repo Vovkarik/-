@@ -12,3 +12,11 @@ std::string Point::ToString() const
 {
 	return "(" + std::to_string(x) + ", " + std::to_string(y) + ")";
 }
+
+std::istream & operator >> (std::istream & input, Point & point)
+{
+	double x, y;
+	input >> x >> y;
+	point = Point(x, y);
+	return input;
+}

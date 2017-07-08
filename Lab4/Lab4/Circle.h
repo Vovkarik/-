@@ -1,8 +1,11 @@
 #pragma once
 #include "ISolidShape.h"
+#include "Point.h"
+
 class CCircle : public ISolidShape
 {
 public:
+	CCircle() = default;
 	CCircle(Point const& center, double radius, std::string const& outlineColor, std::string const& fillColor);
 	~CCircle() = default;
 	double GetArea() const;
@@ -18,3 +21,4 @@ private:
 	std::string m_outlineColor, m_fillColor;
 };
 
+std::istream & operator >> (std::istream & input, CCircle & circle);

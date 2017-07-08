@@ -23,6 +23,16 @@ std::string CLineSegment::GetOutlineColor() const
 	return m_outlineColor;
 }
 
+double CLineSegment::GetArea() const
+{
+	return false;
+}
+
+double CLineSegment::GetPerimeter() const
+{
+	return false;
+}
+
 std::string CLineSegment::ToString() const
 {
 	return (std::string("Type: Line") + "\n"
@@ -31,3 +41,11 @@ std::string CLineSegment::ToString() const
 		+ "End point: " + GetEndPoint().ToString() + "\n");
 }
 
+std::istream & operator >> (std::istream & input, CLineSegment & line)
+{
+	Point start, end;
+	std::string outlineColor;
+	input >> start >> end >> outlineColor;
+	line = CLineSegment(start, end, outlineColor);
+	return input;
+}
