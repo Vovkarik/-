@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26730.3
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Lab4", "Lab4\Lab4.vcxproj", "{694C6D81-23D6-4417-86B5-B3C6E19B57E0}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Shapes", "Lab4\Lab4.vcxproj", "{694C6D81-23D6-4417-86B5-B3C6E19B57E0}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ShapesTest", "ShapesTest\ShapesTest.vcxproj", "{2D0CC195-7018-4E25-9E6A-ECA1F159DE0F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,8 +23,19 @@ Global
 		{694C6D81-23D6-4417-86B5-B3C6E19B57E0}.Release|x64.Build.0 = Release|x64
 		{694C6D81-23D6-4417-86B5-B3C6E19B57E0}.Release|x86.ActiveCfg = Release|Win32
 		{694C6D81-23D6-4417-86B5-B3C6E19B57E0}.Release|x86.Build.0 = Release|Win32
+		{2D0CC195-7018-4E25-9E6A-ECA1F159DE0F}.Debug|x64.ActiveCfg = Debug|x64
+		{2D0CC195-7018-4E25-9E6A-ECA1F159DE0F}.Debug|x64.Build.0 = Debug|x64
+		{2D0CC195-7018-4E25-9E6A-ECA1F159DE0F}.Debug|x86.ActiveCfg = Debug|Win32
+		{2D0CC195-7018-4E25-9E6A-ECA1F159DE0F}.Debug|x86.Build.0 = Debug|Win32
+		{2D0CC195-7018-4E25-9E6A-ECA1F159DE0F}.Release|x64.ActiveCfg = Release|x64
+		{2D0CC195-7018-4E25-9E6A-ECA1F159DE0F}.Release|x64.Build.0 = Release|x64
+		{2D0CC195-7018-4E25-9E6A-ECA1F159DE0F}.Release|x86.ActiveCfg = Release|Win32
+		{2D0CC195-7018-4E25-9E6A-ECA1F159DE0F}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FE3EE56B-D7D0-480B-BBAF-159138878255}
 	EndGlobalSection
 EndGlobal

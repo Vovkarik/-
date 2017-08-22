@@ -23,7 +23,7 @@ CController::CController(std::istream & input, std::ostream & output)
 
 size_t FindPosOfShapeWithMinPerimiter(std::vector<std::shared_ptr<IShape>> shapes)
 {
-    size_t minPerimiterPosition;
+    size_t minPerimiterPosition = 0;
     double minPerimiter = 0;
     for (size_t i = 0; i < shapes.size(); ++i)
     {
@@ -38,7 +38,7 @@ size_t FindPosOfShapeWithMinPerimiter(std::vector<std::shared_ptr<IShape>> shape
 
 size_t FindPosOfShapeWithMaxArea(std::vector<std::shared_ptr<IShape>> shapes)
 {
-    size_t maxAreaPosition;
+    size_t maxAreaPosition = 0;
     double maxArea = 0;
     for (size_t i = 0; i < shapes.size(); ++i)
     {
@@ -51,7 +51,7 @@ size_t FindPosOfShapeWithMaxArea(std::vector<std::shared_ptr<IShape>> shapes)
     return maxAreaPosition;
 }
 
-void CController::PrintInfo() const
+bool CController::PrintInfo(std::istream & in) const
 {
 	if (!m_shapes.empty())
 	{
@@ -64,7 +64,10 @@ void CController::PrintInfo() const
 		auto shapeWithMaxArea = m_shapes[maxArea];
 		m_output << "The shape with the largest area:\n";
 		m_output << shapeWithMaxArea->ToString() << "\n";
+
+		return true;
 	}
+	return false;
 }
 
 bool CController::HandleCommand() const

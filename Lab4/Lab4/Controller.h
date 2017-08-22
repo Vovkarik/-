@@ -6,7 +6,7 @@ class CController
 {
 public:
 	CController(std::istream & input, std::ostream & output);
-	void PrintInfo() const;
+	bool PrintInfo(std::istream & in) const;
 	bool HandleCommand() const;
 private:
 	bool CreateLine(std::istream & in);
