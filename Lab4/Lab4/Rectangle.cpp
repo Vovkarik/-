@@ -56,7 +56,7 @@ double CRectangle::GetHeight() const
 
 std::string CRectangle::ToString() const
 {
-	return (std::string("Rectangle") + "\n"
+	return (std::string("Rectangle:") + "\n"
 		+ "Area: " + std::to_string(GetArea()) + "\n"
 		+ "Perimeter: " + std::to_string(GetPerimeter()) + "\n"
 		+ "Outline color: " + GetOutlineColor() + "\n"
@@ -67,12 +67,14 @@ std::string CRectangle::ToString() const
 		+ "Height: " + std::to_string(GetHeight()) + "\n");
 }
 
-std::istream & operator >> (std::istream & input, CRectangle & rectangle)
+std::istream & operator >> (std::istream & input, std::shared_ptr<CRectangle> & rectangle)
 {
 	Point leftTop;
 	double height, width;
 	std::string outlineColor, fillColor;
-	input >> leftTop >> width >> height >> outlineColor >> fillColor;
-	rectangle = CRectangle(leftTop, width, height, outlineColor, fillColor);
+	if (input >> leftTop && input >> width && input >> height && input >> outlineColor && input >> fillColor && outlineColor.length() == 6 && fillColor.length() == 6)
+	{
+		rectangle = std::make_shared<CRectangle>(leftTop, width, height, outlineColor, fillColor);
+	}
 	return input;
 }

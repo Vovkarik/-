@@ -49,12 +49,12 @@ Point CTriangle::GetVertex3() const
 
 double CTriangle::GetSideLength(Point p1, Point p2) const
 {
-	return (sqrt((p2.x - p1.x) + (p2.y - p1.y)));
+	return std::hypot(p2.x - p1.x, p2.y - p1.y);
 }
 
 std::string CTriangle::ToString() const
 {
-	return (std::string("Triangle") + "\n"
+	return (std::string("Triangle:") + "\n"
 		+ "Area: " + std::to_string(GetArea()) + "\n"
 		+ "Perimeter: " + std::to_string(GetPerimeter()) + "\n"
 		+ "Outline color: " + GetOutlineColor() + "\n"
@@ -64,11 +64,13 @@ std::string CTriangle::ToString() const
 		+ "Vertex 3: " + GetVertex3().ToString() + "\n");
 }
 
-std::istream & operator >> (std::istream & input, CTriangle & triangle)
+std::istream & operator >> (std::istream & input, std::shared_ptr<CTriangle> & triangle)
 {
 	Point vertex1, vertex2, vertex3;
 	std::string outlineColor, fillColor;
-	input >> vertex1 >> vertex2 >> vertex3 >> outlineColor >> fillColor;
-	triangle = CTriangle(vertex1, vertex2, vertex3, outlineColor, fillColor);
+	if(input >> vertex1 && input >> vertex2 && input >> vertex3 && input >> outlineColor && input >> fillColor && outlineColor.length() == 6 && fillColor.length() == 6)
+	{
+		triangle = std::make_shared<CTriangle>(vertex1, vertex2, vertex3, outlineColor, fillColor);
+	}
 	return input;
 }

@@ -39,25 +39,28 @@ Point CCircle::GetCenter() const
 double CCircle::GetRadius() const
 {
 	return m_radius;
+	return true;
 }
 
 std::string CCircle::ToString() const
 {
 	return (std::string("Circle") + "\n"
-		+ "Area: " + std::to_string(GetArea()) + "\n"
-		+ "Perimeter: " + std::to_string(GetPerimeter()) + "\n"
+		+ "Area: " + std::to_string(std::round(GetArea() * 10000) / 10000) + "\n"
+		+ "Perimeter: " + std::to_string(std::round(GetPerimeter() * 10000) / 10000) + "\n"
 		+ "Outline color: " + GetOutlineColor() + "\n"
 		+ "Fill color: " + GetFillColor() + "\n"
 		+ "Center: " + GetCenter().ToString() + "\n"
 		+ "Radius: " + std::to_string(GetRadius()) + "\n");
 }
 
-std::istream & operator >> (std::istream & input, CCircle & circle)
+std::istream & operator >> (std::istream & input, std::shared_ptr<CCircle> & circle)
 {
 	Point center;
 	double radius;
 	std::string outlineColor, fillColor;
-	input >> center >> radius >> outlineColor >> fillColor;
-	circle = CCircle(center, radius, outlineColor, fillColor);
+	if (input >> center && input >> radius && input >> outlineColor && input >> fillColor && outlineColor.length() == 6 && fillColor.length() == 6)
+	{
+		circle = std::make_shared<CCircle>(center, radius, outlineColor, fillColor);
+	}
 	return input;
 }

@@ -23,5 +23,5 @@ private:
 	std::string m_outlineColor, m_fillColor;
 };
 
-std::istream & operator >> (std::istream & input, CRectangle & rectangle);
+std::istream & operator >> (std::istream & input, std::shared_ptr<CRectangle> & rectangle);
 

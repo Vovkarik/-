@@ -30,22 +30,26 @@ double CLineSegment::GetArea() const
 
 double CLineSegment::GetPerimeter() const
 {
-	return false;
+	return std::hypot(m_endPoint.x - m_startPoint.x, m_endPoint.y - m_startPoint.y);
 }
 
 std::string CLineSegment::ToString() const
 {
-	return (std::string("Type: Line") + "\n"
+	return (std::string("Line:") + "\n"
+		+ "Area: 0" + "\n"
 		+ "Outline color: " + GetOutlineColor() + "\n"
+		+ "Perimeter: " + std::to_string(GetPerimeter()) + "\n"
 		+ "Start point: " + GetStartPoint().ToString() + "\n"
 		+ "End point: " + GetEndPoint().ToString() + "\n");
 }
 
-std::istream & operator >> (std::istream & input, CLineSegment & line)
+std::istream & operator >> (std::istream & input, std::shared_ptr<CLineSegment> & line)
 {
 	Point start, end;
 	std::string outlineColor;
-	input >> start >> end >> outlineColor;
-	line = CLineSegment(start, end, outlineColor);
+	if (input >> start && input >> end && input >> outlineColor && outlineColor.length() == 6)
+	{
+		line = std::make_shared<CLineSegment>(start, end, outlineColor);
+	}
 	return input;
 }

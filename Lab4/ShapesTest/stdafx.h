@@ -6,6 +6,8 @@
 
 #include <boost/algorithm/string/replace.hpp>
 #define BOOST_TEST_INCLUDED
+#define _USE_MATH_DEFINES
+
 #pragma warning (disable: 4702)
 #include <boost/test/unit_test.hpp>
 #include <windows.h>
@@ -13,5 +15,5 @@
 #include <sstream>
 #include <math.h>
 #include <boost/math/constants/constants.hpp>
-
+#include <cmath>
 // TODO: Установите здесь ссылки на дополнительные заголовки, требующиеся для программы

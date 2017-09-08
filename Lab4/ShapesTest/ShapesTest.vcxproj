@@ -149,10 +149,25 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\Lab4\Circle.h" />
+    <ClInclude Include="..\Lab4\Controller.h" />
+    <ClInclude Include="..\Lab4\IShape.h" />
+    <ClInclude Include="..\Lab4\ISolidShape.h" />
+    <ClInclude Include="..\Lab4\LineSegment.h" />
+    <ClInclude Include="..\Lab4\Point.h" />
+    <ClInclude Include="..\Lab4\Rectangle.h" />
+    <ClInclude Include="..\Lab4\Triangle.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\Lab4\Circle.cpp" />
+    <ClCompile Include="..\Lab4\Controller.cpp" />
+    <ClCompile Include="..\Lab4\ISolidShape.cpp" />
+    <ClCompile Include="..\Lab4\LineSegment.cpp" />
+    <ClCompile Include="..\Lab4\Point.cpp" />
+    <ClCompile Include="..\Lab4\Rectangle.cpp" />
+    <ClCompile Include="..\Lab4\Triangle.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

@@ -20,4 +20,4 @@ private:
 	Point m_endPoint;
 };
 
-std::istream & operator >> (std::istream & input, CLineSegment & line);
+std::istream & operator >> (std::istream & input, std::shared_ptr<CLineSegment> & line);

@@ -16,7 +16,9 @@ std::string Point::ToString() const
 std::istream & operator >> (std::istream & input, Point & point)
 {
 	double x, y;
-	input >> x >> y;
-	point = Point(x, y);
+	if (input >> x && input >> y)
+	{
+		point = Point(x, y);
+	}
 	return input;
 }
