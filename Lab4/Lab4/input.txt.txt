@@ -1,0 +1,9 @@
+line 10 10 20 20 201321
+line 5 6 10 20 FF00AA
+circle 10 10 5 FF00FF AA00FF
+circle 50 50 10 aerrsa asrssa
+rectangle 5 5 100 100 FF00AA AFDBS0
+rectangle 50 50 1 1 FFFSAF SDDSfS
+triangle 1 1 2 1 2 2 FFASAW ASFASE
+triangle 5 5 6 7 0 1 010101 030432 
+Info
