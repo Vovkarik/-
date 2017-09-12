@@ -53,14 +53,14 @@ std::string CCircle::ToString() const
 		+ "Radius: " + std::to_string(GetRadius()) + "\n");
 }
 
-std::istream & operator >> (std::istream & input, std::shared_ptr<CCircle> & circle)
+std::istream & operator >> (std::istream & input, CCircle & circle)
 {
 	Point center;
 	double radius;
 	std::string outlineColor, fillColor;
 	if (input >> center && input >> radius && input >> outlineColor && input >> fillColor && outlineColor.length() == 6 && fillColor.length() == 6)
 	{
-		circle = std::make_shared<CCircle>(center, radius, outlineColor, fillColor);
+		circle = CCircle(center, radius, outlineColor, fillColor);
 	}
 	return input;
 }

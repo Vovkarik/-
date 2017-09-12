@@ -64,13 +64,13 @@ std::string CTriangle::ToString() const
 		+ "Vertex 3: " + GetVertex3().ToString() + "\n");
 }
 
-std::istream & operator >> (std::istream & input, std::shared_ptr<CTriangle> & triangle)
+std::istream & operator >> (std::istream & input, CTriangle & triangle)
 {
 	Point vertex1, vertex2, vertex3;
 	std::string outlineColor, fillColor;
 	if(input >> vertex1 && input >> vertex2 && input >> vertex3 && input >> outlineColor && input >> fillColor && outlineColor.length() == 6 && fillColor.length() == 6)
 	{
-		triangle = std::make_shared<CTriangle>(vertex1, vertex2, vertex3, outlineColor, fillColor);
+		triangle = CTriangle(vertex1, vertex2, vertex3, outlineColor, fillColor);
 	}
 	return input;
 }

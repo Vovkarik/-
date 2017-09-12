@@ -21,4 +21,4 @@ private:
 	std::string m_outlineColor, m_fillColor;
 };
 
-std::istream & operator >> (std::istream & input, std::shared_ptr<CCircle> & circle);
+std::istream & operator >> (std::istream & input, CCircle & circle);

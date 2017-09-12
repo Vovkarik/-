@@ -67,14 +67,14 @@ std::string CRectangle::ToString() const
 		+ "Height: " + std::to_string(GetHeight()) + "\n");
 }
 
-std::istream & operator >> (std::istream & input, std::shared_ptr<CRectangle> & rectangle)
+std::istream & operator >> (std::istream & input, CRectangle & rectangle)
 {
 	Point leftTop;
 	double height, width;
 	std::string outlineColor, fillColor;
 	if (input >> leftTop && input >> width && input >> height && input >> outlineColor && input >> fillColor && outlineColor.length() == 6 && fillColor.length() == 6)
 	{
-		rectangle = std::make_shared<CRectangle>(leftTop, width, height, outlineColor, fillColor);
+		rectangle = CRectangle(leftTop, width, height, outlineColor, fillColor);
 	}
 	return input;
 }

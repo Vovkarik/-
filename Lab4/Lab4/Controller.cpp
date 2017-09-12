@@ -94,32 +94,32 @@ bool CController::HandleCommand() const
 
 bool CController::CreateLine(std::istream & in)
 {
-	std::shared_ptr<CLineSegment> line;
-	if(in >> line) m_shapes.push_back(line);
+	CLineSegment line;
+	if(in >> line) m_shapes.push_back(std::make_shared<CLineSegment>(line));
 	else std::cout << "Wrong parameters, format: (begin x) (begin y) (end x) (end y) (outline color)" << std::endl;
 	return false;
 }
 
 bool CController::CreateCircle(std::istream & in)
 {
-	std::shared_ptr<CCircle> circle;
-	if(in >> circle) m_shapes.push_back(circle);
+	CCircle circle;
+	if(in >> circle) m_shapes.push_back(std::make_shared<CCircle>(circle));
 	else std::cout << "Wrong parameters, format: (center x) (center y) (radius) (outline color) (fill color)" << std::endl;
 	return false;
 }
 
 bool CController::CreateRectangle(std::istream & in)
 {
-	std::shared_ptr<CRectangle> rectangle;
-	if(in >> rectangle) m_shapes.push_back(rectangle);
+	CRectangle rectangle;
+	if(in >> rectangle) m_shapes.push_back(std::make_shared<CRectangle>(rectangle));
 	else std::cout << "Wrong parameters, format: (left top x) (left top y) (width) (height) (outline color) (fill color)" << std::endl;
 	return false;
 }
 
 bool CController::CreateTriangle(std::istream & in)
 {
-	std::shared_ptr<CTriangle> triangle;
-	if(in >> triangle) m_shapes.push_back(triangle);
+	CTriangle triangle;
+	if(in >> triangle) m_shapes.push_back(std::make_shared<CTriangle>(triangle));
 	else std::cout << "Wrong parameters, format: (vertex 1 x) (vertex 1 y) (vertex 2 x) (vertex 2 y) (vertex 3 x) (vertex 3 y) (outline color) (fill color)" << std::endl;
 	return false;
 }

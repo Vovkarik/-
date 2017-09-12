@@ -22,4 +22,4 @@ private:
 	Point m_vertex1, m_vertex2, m_vertex3;
 };
 
-std::istream & operator >> (std::istream & input, std::shared_ptr<CTriangle> & triangle);
+std::istream & operator >> (std::istream & input, CTriangle & triangle);

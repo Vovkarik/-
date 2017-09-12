@@ -95,14 +95,14 @@ BOOST_AUTO_TEST_SUITE(Circle_class)
 
 BOOST_AUTO_TEST_CASE(can_be_initialized_from_ifstream)
 {
-	std::shared_ptr<CCircle> circle;
+	CCircle circle;
 	std::stringstream input("0 0 10 010101 FAFAFA");
 	BOOST_CHECK(input >> circle);
-	BOOST_CHECK_EQUAL(circle->GetRadius(), 10);
-	BOOST_CHECK_EQUAL(circle->GetArea(), M_PI * 10 * 10);
-	BOOST_CHECK_EQUAL(circle->GetPerimeter(), 2 * M_PI * 10);
-	BOOST_CHECK_EQUAL(circle->GetOutlineColor(), "010101");
-	BOOST_CHECK_EQUAL(circle->GetFillColor(), "FAFAFA");
+	BOOST_CHECK_EQUAL(circle.GetRadius(), 10);
+	BOOST_CHECK_EQUAL(circle.GetArea(), M_PI * 10 * 10);
+	BOOST_CHECK_EQUAL(circle.GetPerimeter(), 2 * M_PI * 10);
+	BOOST_CHECK_EQUAL(circle.GetOutlineColor(), "010101");
+	BOOST_CHECK_EQUAL(circle.GetFillColor(), "FAFAFA");
 }
 
 BOOST_AUTO_TEST_SUITE_END()
@@ -155,14 +155,14 @@ BOOST_AUTO_TEST_SUITE(LineSegment_class)
 
 BOOST_AUTO_TEST_CASE(can_be_initialized_from_ifstream)
 {
-	std::shared_ptr<CLineSegment> line;
+	CLineSegment line;
 	std::stringstream input("0 0 0 5 010101");
 	BOOST_CHECK(input >> line);
-	VerifyPoint(line->GetStartPoint(), 0.f, 0.f);
-	VerifyPoint(line->GetEndPoint(), 0.f, 5.f);
-	BOOST_CHECK_EQUAL(line->GetArea(), 0);
-	BOOST_CHECK_EQUAL(line->GetPerimeter(), 5);
-	BOOST_CHECK_EQUAL(line->GetOutlineColor(), "010101");
+	VerifyPoint(line.GetStartPoint(), 0.f, 0.f);
+	VerifyPoint(line.GetEndPoint(), 0.f, 5.f);
+	BOOST_CHECK_EQUAL(line.GetArea(), 0);
+	BOOST_CHECK_EQUAL(line.GetPerimeter(), 5);
+	BOOST_CHECK_EQUAL(line.GetOutlineColor(), "010101");
 }
 
 BOOST_AUTO_TEST_SUITE_END()
@@ -230,17 +230,17 @@ BOOST_AUTO_TEST_SUITE(Rectangle_class)
 
 BOOST_AUTO_TEST_CASE(can_be_initialized_from_ifstream)
 {
-	std::shared_ptr<CRectangle> rectangle;
+	CRectangle rectangle;
 	std::stringstream input("1 1 50 100 010101 FAFAFA");
 	BOOST_CHECK(input >> rectangle);
-	BOOST_CHECK_EQUAL(rectangle->GetWidth(), 50);
-	BOOST_CHECK_EQUAL(rectangle->GetHeight(), 100);
-	VerifyPoint(rectangle->GetLeftTop(), 1.f, 1.f);
-	VerifyPoint(rectangle->GetRightBottom(), 51.f, 101.f);
-	BOOST_CHECK_EQUAL(rectangle->GetArea(), 5000);
-	BOOST_CHECK_EQUAL(rectangle->GetPerimeter(), 300);
-	BOOST_CHECK_EQUAL(rectangle->GetOutlineColor(), "010101");
-	BOOST_CHECK_EQUAL(rectangle->GetFillColor(), "FAFAFA");
+	BOOST_CHECK_EQUAL(rectangle.GetWidth(), 50);
+	BOOST_CHECK_EQUAL(rectangle.GetHeight(), 100);
+	VerifyPoint(rectangle.GetLeftTop(), 1.f, 1.f);
+	VerifyPoint(rectangle.GetRightBottom(), 51.f, 101.f);
+	BOOST_CHECK_EQUAL(rectangle.GetArea(), 5000);
+	BOOST_CHECK_EQUAL(rectangle.GetPerimeter(), 300);
+	BOOST_CHECK_EQUAL(rectangle.GetOutlineColor(), "010101");
+	BOOST_CHECK_EQUAL(rectangle.GetFillColor(), "FAFAFA");
 }
 
 BOOST_AUTO_TEST_SUITE_END()
@@ -307,14 +307,14 @@ BOOST_AUTO_TEST_SUITE(Triangle_class)
 
 BOOST_AUTO_TEST_CASE(can_be_initialized_from_ifstream)
 {
-	std::shared_ptr<CTriangle> triangle;
+	CTriangle triangle;
 	std::stringstream input("0 0 0 4 5 0 010101 FAFAFA");
 	BOOST_CHECK(input >> triangle);
-	VerifyPoint(triangle->GetVertex1(), 0.f, 0.f);
-	VerifyPoint(triangle->GetVertex2(), 0.f, 4.f);
-	VerifyPoint(triangle->GetVertex3(), 5.f, 0.f);
-	BOOST_CHECK_EQUAL(triangle->GetOutlineColor(), "010101");
-	BOOST_CHECK_EQUAL(triangle->GetFillColor(), "FAFAFA");
+	VerifyPoint(triangle.GetVertex1(), 0.f, 0.f);
+	VerifyPoint(triangle.GetVertex2(), 0.f, 4.f);
+	VerifyPoint(triangle.GetVertex3(), 5.f, 0.f);
+	BOOST_CHECK_EQUAL(triangle.GetOutlineColor(), "010101");
+	BOOST_CHECK_EQUAL(triangle.GetFillColor(), "FAFAFA");
 }
 
 BOOST_AUTO_TEST_SUITE_END()

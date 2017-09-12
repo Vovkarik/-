@@ -43,13 +43,13 @@ std::string CLineSegment::ToString() const
 		+ "End point: " + GetEndPoint().ToString() + "\n");
 }
 
-std::istream & operator >> (std::istream & input, std::shared_ptr<CLineSegment> & line)
+std::istream & operator >> (std::istream & input, CLineSegment & line)
 {
 	Point start, end;
 	std::string outlineColor;
 	if (input >> start && input >> end && input >> outlineColor && outlineColor.length() == 6)
 	{
-		line = std::make_shared<CLineSegment>(start, end, outlineColor);
+		line = CLineSegment(start, end, outlineColor);
 	}
 	return input;
 }
