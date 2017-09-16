@@ -49,7 +49,7 @@ double CRectangle::GetHeight() const
 
 void CRectangle::AppendProperties(std::ostream & strm) const
 {
-	strm << "FillColor: " << GetFillColor() << "\n"
+	strm << "Fill color: " << GetFillColor() << "\n"
 		<< "Area: " << GetArea() << "\n"
 		<< "Perimeter: " << GetPerimeter() << "\n"
 		<< "LeftTop: " << GetLeftTop().ToString() << "\n"

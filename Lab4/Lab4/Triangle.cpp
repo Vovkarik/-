@@ -48,7 +48,8 @@ double CTriangle::GetSideLength(Point p1, Point p2) const
 
 void CTriangle::AppendProperties(std::ostream & strm) const
 {
-	strm << "Area: " << GetArea() << "\n"
+	strm << "Fill color: " << GetFillColor() << "\n"
+		<< "Area: " << GetArea() << "\n"
 		<< "Perimeter: " << GetPerimeter() << "\n"
 		<< "Vertex 1: " << GetVertex1().ToString() << "\n"
 		<< "Vertex 2: " << GetVertex2().ToString() << "\n"

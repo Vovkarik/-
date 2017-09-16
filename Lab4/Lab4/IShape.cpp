@@ -16,7 +16,7 @@ std::string IShape::ToString() const
 {
 	std::ostringstream strm;
 	strm << "\n" << m_type << "\n"
-		<< "OutlineColor: " << GetOutlineColor() << "\n";
+		<< "Outline color: " << GetOutlineColor() << "\n";
 	AppendProperties(strm);
 	return strm.str();
 }

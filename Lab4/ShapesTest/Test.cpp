@@ -87,6 +87,7 @@ BOOST_AUTO_TEST_CASE(to_string_print_correct_data)
 		<< "Center: (5.000000, 10.000000)" << "\n"
 		<< "Radius: 5.000000" << "\n";
 	BOOST_CHECK_EQUAL(circle.ToString(), expectedStr.str());
+	BOOST_CHECK_EQUAL(circle.ToString().length(), expectedStr.str().length());
 }
 
 BOOST_AUTO_TEST_SUITE_END()
@@ -221,11 +222,11 @@ BOOST_AUTO_TEST_CASE(to_string_print_correct_data)
 		<< "Outline color: 000000" << "\n"
 		<< "Fill color: 0000FF" << "\n"
 		<< "Area: 5000" << "\n"
-		<< "Perimeter: 300.000000" << "\n"
+		<< "Perimeter: 300" << "\n"
 		<< "LeftTop: (1.000000, 1.000000)" << "\n"
 		<< "RightBottom: (51.000000, 101.000000)" << "\n"
-		<< "Width: 50.000000" << "\n"
-		<< "Height: 100.000000" << "\n";
+		<< "Width: 50" << "\n"
+		<< "Height: 100" << "\n";
 	BOOST_CHECK_EQUAL(rectangle.ToString(), expectedStr.str());
 }
 
