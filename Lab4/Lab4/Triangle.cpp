@@ -2,12 +2,11 @@
 #include "Triangle.h"
 
 CTriangle::CTriangle(Point const& vertex1, Point const& vertex2, Point const& vertex3, std::string const& outlineColor, std::string const& fillColor)
-	: ISolidShape()
-	, m_outlineColor(outlineColor)
-	, m_fillColor(fillColor)
+	: ISolidShape("Triangle", outlineColor)
 	, m_vertex1(vertex1)
 	, m_vertex2(vertex2)
 	, m_vertex3(vertex3)
+	, m_fillColor(fillColor)
 {
 }
 
@@ -20,11 +19,6 @@ double CTriangle::GetArea() const
 double CTriangle::GetPerimeter() const
 {
 	return (GetSideLength(GetVertex1(), GetVertex2()) + GetSideLength(GetVertex2(), GetVertex3()) + GetSideLength(GetVertex3(), GetVertex1()));
-}
-
-std::string CTriangle::GetOutlineColor() const
-{
-	return m_outlineColor;
 }
 
 std::string CTriangle::GetFillColor() const
@@ -52,16 +46,13 @@ double CTriangle::GetSideLength(Point p1, Point p2) const
 	return std::hypot(p2.x - p1.x, p2.y - p1.y);
 }
 
-std::string CTriangle::ToString() const
+void CTriangle::AppendProperties(std::ostream & strm) const
 {
-	return (std::string("Triangle:") + "\n"
-		+ "Area: " + std::to_string(GetArea()) + "\n"
-		+ "Perimeter: " + std::to_string(GetPerimeter()) + "\n"
-		+ "Outline color: " + GetOutlineColor() + "\n"
-		+ "Fill color: " + GetFillColor() + "\n"
-		+ "Vertex 1: " + GetVertex1().ToString() + "\n"
-		+ "Vertex 2: " + GetVertex2().ToString() + "\n"
-		+ "Vertex 3: " + GetVertex3().ToString() + "\n");
+	strm << "Area: " << GetArea() << "\n"
+		<< "Perimeter: " << GetPerimeter() << "\n"
+		<< "Vertex 1: " << GetVertex1().ToString() << "\n"
+		<< "Vertex 2: " << GetVertex2().ToString() << "\n"
+		<< "Vertex 3: " << GetVertex3().ToString() << "\n";
 }
 
 std::istream & operator >> (std::istream & input, CTriangle & triangle)

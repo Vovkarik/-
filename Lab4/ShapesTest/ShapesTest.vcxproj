@@ -163,6 +163,7 @@
   <ItemGroup>
     <ClCompile Include="..\Lab4\Circle.cpp" />
     <ClCompile Include="..\Lab4\Controller.cpp" />
+    <ClCompile Include="..\Lab4\IShape.cpp" />
     <ClCompile Include="..\Lab4\ISolidShape.cpp" />
     <ClCompile Include="..\Lab4\LineSegment.cpp" />
     <ClCompile Include="..\Lab4\Point.cpp" />

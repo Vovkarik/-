@@ -94,7 +94,9 @@ bool CController::HandleCommand() const
 
 bool CController::CreateLine(std::istream & in)
 {
-	CLineSegment line;
+	std::string outlineColor = "";
+	Point startPoint, endPoint;
+	CLineSegment line(startPoint, endPoint, outlineColor);
 	if(in >> line) m_shapes.push_back(std::make_shared<CLineSegment>(line));
 	else std::cout << "Wrong parameters, format: (begin x) (begin y) (end x) (end y) (outline color)" << std::endl;
 	return false;
@@ -102,7 +104,10 @@ bool CController::CreateLine(std::istream & in)
 
 bool CController::CreateCircle(std::istream & in)
 {
-	CCircle circle;
+	Point center;
+	double radius = 0;
+	std::string outlineColor = "", fillColor = "";
+	CCircle circle(center, radius, outlineColor, fillColor);
 	if(in >> circle) m_shapes.push_back(std::make_shared<CCircle>(circle));
 	else std::cout << "Wrong parameters, format: (center x) (center y) (radius) (outline color) (fill color)" << std::endl;
 	return false;
@@ -110,7 +115,10 @@ bool CController::CreateCircle(std::istream & in)
 
 bool CController::CreateRectangle(std::istream & in)
 {
-	CRectangle rectangle;
+	Point leftTop;
+	double width = 0, height = 0;
+	std::string outlineColor = "", fillColor = "";
+	CRectangle rectangle(leftTop, width, height, outlineColor, fillColor);
 	if(in >> rectangle) m_shapes.push_back(std::make_shared<CRectangle>(rectangle));
 	else std::cout << "Wrong parameters, format: (left top x) (left top y) (width) (height) (outline color) (fill color)" << std::endl;
 	return false;
@@ -118,7 +126,9 @@ bool CController::CreateRectangle(std::istream & in)
 
 bool CController::CreateTriangle(std::istream & in)
 {
-	CTriangle triangle;
+	Point v1, v2, v3;
+	std::string outlineColor = "", fillColor = "";
+	CTriangle triangle(v1, v2, v3, outlineColor, fillColor);
 	if(in >> triangle) m_shapes.push_back(std::make_shared<CTriangle>(triangle));
 	else std::cout << "Wrong parameters, format: (vertex 1 x) (vertex 1 y) (vertex 2 x) (vertex 2 y) (vertex 3 x) (vertex 3 y) (outline color) (fill color)" << std::endl;
 	return false;

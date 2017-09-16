@@ -79,11 +79,11 @@ BOOST_AUTO_TEST_CASE(has_correct_radius)
 BOOST_AUTO_TEST_CASE(to_string_print_correct_data)
 {
 	std::stringstream expectedStr;
-	expectedStr << "Circle" << "\n"
-		<< "Area: " << (boost::math::constants::pi<long double>() * 5.0f * 5.0f) << 0 << 0 << "\n"
-		<< "Perimeter: " << (boost::math::constants::two_pi<long double>() * 5.0f) << 0 << 0 << "\n"
+	expectedStr << "\n" << "Circle" << "\n"
 		<< "Outline color: 000000" << "\n"
 		<< "Fill color: 0000FF" << "\n"
+		<< "Area: " << (boost::math::constants::pi<long double>() * 5.0f * 5.0f) << 0 << 0 << "\n"
+		<< "Perimeter: " << (boost::math::constants::two_pi<long double>() * 5.0f) << 0 << 0 << "\n"
 		<< "Center: (5.000000, 10.000000)" << "\n"
 		<< "Radius: 5.000000" << "\n";
 	BOOST_CHECK_EQUAL(circle.ToString(), expectedStr.str());
@@ -95,7 +95,10 @@ BOOST_AUTO_TEST_SUITE(Circle_class)
 
 BOOST_AUTO_TEST_CASE(can_be_initialized_from_ifstream)
 {
-	CCircle circle;
+	Point center;
+	double radius = 0;
+	std::string outlineColor = "", fillColor = "";
+	CCircle circle(center, radius, outlineColor, fillColor);
 	std::stringstream input("0 0 10 010101 FAFAFA");
 	BOOST_CHECK(input >> circle);
 	BOOST_CHECK_EQUAL(circle.GetRadius(), 10);
@@ -140,9 +143,9 @@ BOOST_AUTO_TEST_CASE(has_correct_end_point)
 BOOST_AUTO_TEST_CASE(to_string_print_correct_data)
 {
 	std::stringstream expectedStr;
-	expectedStr << "Line:" << "\n"
-		<< "Area: 0" << "\n"
+	expectedStr << "\n" << "Line" << "\n"
 		<< "Outline color: 000000" << "\n"
+		<< "Area: 0" << "\n"
 		<< "Perimeter: 5.000000" << "\n"
 		<< "Start point: (5.000000, 10.000000)" << "\n"
 		<< "End point: (9.000000, 7.000000)" << "\n";
@@ -155,7 +158,9 @@ BOOST_AUTO_TEST_SUITE(LineSegment_class)
 
 BOOST_AUTO_TEST_CASE(can_be_initialized_from_ifstream)
 {
-	CLineSegment line;
+	std::string outlineColor = "";
+	Point startPoint, endPoint;
+	CLineSegment line(startPoint, endPoint, outlineColor);
 	std::stringstream input("0 0 0 5 010101");
 	BOOST_CHECK(input >> line);
 	VerifyPoint(line.GetStartPoint(), 0.f, 0.f);
@@ -212,11 +217,11 @@ BOOST_AUTO_TEST_CASE(has_correct_height)
 BOOST_AUTO_TEST_CASE(to_string_print_correct_data)
 {
 	std::stringstream expectedStr;
-	expectedStr << "Rectangle:" << "\n"
-		<< "Area: 5000.000000" << "\n"
-		<< "Perimeter: 300.000000" << "\n"
+	expectedStr << "\n" << "Rectangle" << "\n"
 		<< "Outline color: 000000" << "\n"
 		<< "Fill color: 0000FF" << "\n"
+		<< "Area: 5000" << "\n"
+		<< "Perimeter: 300.000000" << "\n"
 		<< "LeftTop: (1.000000, 1.000000)" << "\n"
 		<< "RightBottom: (51.000000, 101.000000)" << "\n"
 		<< "Width: 50.000000" << "\n"
@@ -230,7 +235,10 @@ BOOST_AUTO_TEST_SUITE(Rectangle_class)
 
 BOOST_AUTO_TEST_CASE(can_be_initialized_from_ifstream)
 {
-	CRectangle rectangle;
+	Point leftTop;
+	double width = 0, height = 0;
+	std::string outlineColor = "", fillColor = "";
+	CRectangle rectangle(leftTop, width, height, outlineColor, fillColor);
 	std::stringstream input("1 1 50 100 010101 FAFAFA");
 	BOOST_CHECK(input >> rectangle);
 	BOOST_CHECK_EQUAL(rectangle.GetWidth(), 50);
@@ -290,11 +298,11 @@ BOOST_AUTO_TEST_CASE(has_correct_fill_color)
 BOOST_AUTO_TEST_CASE(to_string_print_correct_data)
 {
 	std::stringstream expectedStr;
-	expectedStr << "Triangle:" << "\n"
-		<< "Area: 2.500000" << "\n"
-		<< "Perimeter: 10.398346" << "\n"
+	expectedStr << "\n" << "Triangle" << "\n"
 		<< "Outline color: 000000" << "\n"
 		<< "Fill color: 0000FF" << "\n"
+		<< "Area: 2.5" << "\n"
+		<< "Perimeter: 10.3983" << "\n"
 		<< "Vertex 1: (5.000000, 10.000000)" << "\n"
 		<< "Vertex 2: (9.000000, 7.000000)" << "\n"
 		<< "Vertex 3: (6.000000, 8.000000)" << "\n";
@@ -307,7 +315,9 @@ BOOST_AUTO_TEST_SUITE(Triangle_class)
 
 BOOST_AUTO_TEST_CASE(can_be_initialized_from_ifstream)
 {
-	CTriangle triangle;
+	Point v1, v2, v3;
+	std::string outlineColor = "", fillColor = "";
+	CTriangle triangle(v1, v2, v3, outlineColor, fillColor);
 	std::stringstream input("0 0 0 4 5 0 010101 FAFAFA");
 	BOOST_CHECK(input >> triangle);
 	VerifyPoint(triangle.GetVertex1(), 0.f, 0.f);

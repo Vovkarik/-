@@ -3,10 +3,9 @@
 #include "Point.h"
 
 CCircle::CCircle(Point const& center, double radius, std::string const& outlineColor, std::string const& fillColor)
-	: ISolidShape()
+	: ISolidShape("Circle", outlineColor)
 	, m_center(center)
 	, m_radius(radius)
-	, m_outlineColor(outlineColor)
 	, m_fillColor(fillColor)
 {
 }
@@ -21,19 +20,14 @@ double CCircle::GetPerimeter() const
 	return 2 * M_PI * m_radius;
 }
 
-std::string CCircle::GetOutlineColor() const
+Point CCircle::GetCenter() const
 {
-	return m_outlineColor;
+	return m_center;
 }
 
 std::string CCircle::GetFillColor() const
 {
 	return m_fillColor;
-}
-
-Point CCircle::GetCenter() const
-{
-	return m_center;
 }
 
 double CCircle::GetRadius() const
@@ -42,15 +36,13 @@ double CCircle::GetRadius() const
 	return true;
 }
 
-std::string CCircle::ToString() const
+void CCircle::AppendProperties(std::ostream & strm) const
 {
-	return (std::string("Circle") + "\n"
-		+ "Area: " + std::to_string(std::round(GetArea() * 10000) / 10000) + "\n"
-		+ "Perimeter: " + std::to_string(std::round(GetPerimeter() * 10000) / 10000) + "\n"
-		+ "Outline color: " + GetOutlineColor() + "\n"
-		+ "Fill color: " + GetFillColor() + "\n"
-		+ "Center: " + GetCenter().ToString() + "\n"
-		+ "Radius: " + std::to_string(GetRadius()) + "\n");
+	strm <<"FillColor: " << GetFillColor() << "\n"
+		<< "Area: " << std::to_string(std::round(GetArea() * 10000) / 10000) << "\n"
+		<< "Perimeter: " << std::to_string(std::round(GetPerimeter() * 10000) / 10000) << "\n"
+		<< "Center: " << GetCenter().ToString() << "\n"
+		<< "Radius: " << std::to_string(GetRadius()) << "\n";
 }
 
 std::istream & operator >> (std::istream & input, CCircle & circle)
