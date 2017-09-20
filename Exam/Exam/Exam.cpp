@@ -51,7 +51,7 @@ public:
 	{
 	}
 
-	void Draw(ICanvas & canvas) const
+	void Draw(ICanvas & canvas) const override
 	{
 		canvas.DrawLine(m_x, m_y, m_x + m_width, m_y);
 		canvas.DrawLine(m_x + m_width, m_y, m_x + m_width, m_y + m_height);
@@ -74,7 +74,7 @@ public:
 	{
 	}
 
-	void Draw(ICanvas & canvas) const
+	void Draw(ICanvas & canvas) const override
 	{
 		canvas.DrawLine(m_vertex1.x, m_vertex1.y, m_vertex2.x, m_vertex2.y);
 		canvas.DrawLine(m_vertex2.x, m_vertex2.y, m_vertex3.x, m_vertex3.y);
@@ -93,6 +93,41 @@ void DrawPicture(ICanvas & canvas, const vector<shared_ptr<const ICanvasDrawable
 		drawable->Draw(canvas);
 	}
 }
+
+class IAnimal
+{
+};
+
+class ICanClimbTree
+{
+public:
+	virtual void Climb() const = 0;
+};
+
+class ICantClimbTree
+{
+};
+
+class CCat : public IAnimal, public ICanClimbTree 
+{
+	void Climb() const
+	{
+		std::cout << "Я залез";
+	}
+};
+
+class CDog : public IAnimal, public ICantClimbTree
+{
+
+};
+
+class CBug : public ICanClimbTree
+{
+	void Climb() const
+	{
+		std::cout << "Я залез";
+	}
+};
 
 int main()
 {
